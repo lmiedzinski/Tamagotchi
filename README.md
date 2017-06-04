@@ -15,3 +15,4 @@ Zrealizowane przy pomocy PITEST, można uruchomić za pomocą komendy:
 ```bash
 mvn org.pitest:pitest-maven:mutationCoverage
 ```
+Po wykonaniu w katalogu target/pit-reports znajdują się raporty.
