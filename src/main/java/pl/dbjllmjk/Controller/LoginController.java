@@ -3,7 +3,7 @@ import pl.dbjllmjk.Model.AccountData;
 import pl.dbjllmjk.Model.BadPasswordException;
 import pl.dbjllmjk.Model.NoSuchUserException;
 import pl.dbjllmjk.Model.UserData;
-//import pl.dbjllmjk.View.LoginView;
+import pl.dbjllmjk.View.LoginView;
 
 /**
  * Controls the Logging Module.
@@ -12,7 +12,7 @@ public class LoginController {
 	private Controller controller;
 	public LoginController(Controller controller) {
 		this.controller = controller;
-//		new LoginView(this);
+		new LoginView(this);
 	}
 
 	/**

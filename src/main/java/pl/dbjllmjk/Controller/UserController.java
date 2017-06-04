@@ -13,7 +13,7 @@ import pl.dbjllmjk.Model.PetEntry;
 import pl.dbjllmjk.Model.PetTransactionException;
 import pl.dbjllmjk.Model.UserData;
 //import pl.dbjllmjk.Model.XmlConverter;
-//import pl.dbjllmjk.View.UserView;
+import pl.dbjllmjk.View.UserView;
 
 /**
  * Logic Layer Implementation for Users.
@@ -32,7 +32,7 @@ public class UserController {
 	/**
 	 * Graphic User Interface field.
 	 */
-//	private UserView userView;
+	private UserView userView;
 
 	/**
 	 * Constructor with parameter.
@@ -42,7 +42,7 @@ public class UserController {
 		this.controller = controller;
 		this.loggedUser = (UserData) controller.getLoggedAccount();
 		this.loggedUser.updatePets(controller.getDataRepository().getPetsForUser(this.loggedUser));
-//		this.userView = new UserView(this);
+		this.userView = new UserView(this);
 	}
 
 	/**
@@ -247,8 +247,8 @@ public class UserController {
 		this.controller.getDataRepository().updatePets(petsToUpdate);
 		this.controller.makeLogicUpdate();
 		this.loggedUser.updatePets(this.getPetsForUser());
-//		this.userView.getPetTab().changeCurrentPet(this.getPetData(name));
-//		this.userView.getMenuTab().selectionMade(this.getPetData(name));
+		this.userView.getPetTab().changeCurrentPet(this.getPetData(name));
+		this.userView.getMenuTab().selectionMade(this.getPetData(name));
 	}
 
 	/**
@@ -279,8 +279,8 @@ public class UserController {
 		this.controller.getDataRepository().updatePets(petsToUpdate);
 		this.controller.makeLogicUpdate();
 		this.loggedUser.updatePets(this.getPetsForUser());
-//		this.userView.getPetTab().changeCurrentPet(this.getPetData(name));
-//		this.userView.getMenuTab().selectionMade(this.getPetData(name));
+		this.userView.getPetTab().changeCurrentPet(this.getPetData(name));
+		this.userView.getMenuTab().selectionMade(this.getPetData(name));
 	}
 
 	/**
@@ -311,8 +311,8 @@ public class UserController {
 		this.controller.getDataRepository().updatePets(petsToUpdate);
 		this.controller.makeLogicUpdate();
 		this.loggedUser.updatePets(this.getPetsForUser());
-//		this.userView.getPetTab().changeCurrentPet(this.getPetData(name));
-//		this.userView.getMenuTab().selectionMade(this.getPetData(name));
+		this.userView.getPetTab().changeCurrentPet(this.getPetData(name));
+		this.userView.getMenuTab().selectionMade(this.getPetData(name));
 	}
 
 	/**
@@ -322,6 +322,7 @@ public class UserController {
 	 * @throws PetTransactionException
 	 */
 	public void importPet(String path, boolean force) throws PetTransactionException {
+//		XMLConverter
 		Pet importedPet = null; //XmlConverter.deserializePet(path);
 		if (importedPet == null)
 			throw new PetTransactionException("Couldn't import pet!");
@@ -365,7 +366,7 @@ public class UserController {
 	 * Performs amazingly unique and unbelievable log out.
 	 */
 	public void logout() {
-//		this.userView.dispose();
+		this.userView.dispose();
 		this.controller.anotherLogin();
 	}
 
@@ -373,8 +374,8 @@ public class UserController {
 	 * Refresh GUI and list of {@link Pet}s.
 	 */
 	public void refresh() {
-//		this.userView.dispose();
+		this.userView.dispose();
 		this.loggedUser.updatePets(this.controller.getDataRepository().getPetsForUser(this.loggedUser));
-//		this.userView = new UserView(this);
+		this.userView = new UserView(this);
 	}
 }
