@@ -12,7 +12,7 @@ import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.PetEntry;
 import pl.dbjllmjk.Model.PetTransactionException;
 import pl.dbjllmjk.Model.UserData;
-//import pl.dbjllmjk.Model.XmlConverter;
+import pl.dbjllmjk.Model.XmlConverter;
 import pl.dbjllmjk.View.UserView;
 
 /**
@@ -322,8 +322,7 @@ public class UserController {
 	 * @throws PetTransactionException
 	 */
 	public void importPet(String path, boolean force) throws PetTransactionException {
-//		XMLConverter
-		Pet importedPet = null; //XmlConverter.deserializePet(path);
+		Pet importedPet = XmlConverter.deserializePet(path);
 		if (importedPet == null)
 			throw new PetTransactionException("Couldn't import pet!");
 		if (force) {
@@ -359,7 +358,7 @@ public class UserController {
 				selectedPet = pet;
 		}
 		if (selectedPet == null) throw new PetTransactionException("You don't have pet: " + name);
-		//XmlConverter.serializePet(selectedPet, path);
+		XmlConverter.serializePet(selectedPet, path);
 	}
 
 	/**
