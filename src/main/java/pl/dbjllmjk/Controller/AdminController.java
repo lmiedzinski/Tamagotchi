@@ -15,7 +15,7 @@ import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.PetTransactionException;
 import pl.dbjllmjk.Model.UserData;
-//import pl.dbjllmjk.View.AdminView;
+import pl.dbjllmjk.View.AdminView;
 /**
  * Logic Layer Implementation for Admins.
  */
@@ -33,7 +33,7 @@ public class AdminController {
 	/**
 	 * Graphic Admin Interface field.
 	 */
-//	private AdminView adminView;
+	private AdminView adminView;
 
 	/**
 	 * Constructor with parameter.
@@ -42,7 +42,7 @@ public class AdminController {
 	public AdminController(Controller controller) {
 		this.controller = controller;
 		this.loggedAdmin = (AdminData) controller.getLoggedAccount();
-//		this.adminView = new AdminView(this);
+		this.adminView = new AdminView(this);
 	}
 
 	/**
@@ -300,15 +300,15 @@ public class AdminController {
 	/**
 	 * @return Reference to GAI.
 	 */
-//	public AdminView getAdminView() {
-//		return adminView;
-//	}
+	public AdminView getAdminView() {
+		return adminView;
+	}
 
 	/**
 	 * Performs amazingly unique and unbelievable log out.
 	 */
 	public void logout() {
-//		this.adminView.dispose();
+		this.adminView.dispose();
 		this.controller.anotherLogin();
 	}
 
@@ -316,9 +316,9 @@ public class AdminController {
 	 * Refresh GAI.
 	 */
 	public void refresh() {
-//		int index = this.adminView.getTabbedPane().getSelectedIndex();
-//		this.adminView.dispose();
-//		this.adminView = new AdminView(this);
-//		this.adminView.getTabbedPane().setSelectedIndex(index);
+		int index = this.adminView.getTabbedPane().getSelectedIndex();
+		this.adminView.dispose();
+		this.adminView = new AdminView(this);
+		this.adminView.getTabbedPane().setSelectedIndex(index);
 	}
 }
