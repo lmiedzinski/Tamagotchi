@@ -159,7 +159,7 @@ public class AdminController {
      */
     public AccountData[] getAccounts() {
         List<AccountData> accountsList = Stream.concat(
-                this.controller.getDataRepository().getAdmins().stream(), 
+                this.controller.getDataRepository().getAdmins().stream(),
                 this.controller.getDataRepository().getUsers().stream())
                 .collect(Collectors.toList());
         return accountsList.toArray(new AccountData[accountsList.size()]);
@@ -315,7 +315,7 @@ public class AdminController {
      * @throws PetTransactionException
      */
     public void updateActionWithTypeConnections(List<JCheckBox> updated, Action selected) throws PetTransactionException {
-        boolean[] flag = new boolean[] {false};
+        boolean[] flag = new boolean[]{false};
         updated.stream().forEach((element) -> {
             if (element.isSelected() && !this.controller.getDataRepository().getPetTypesForAction(selected).contains(element.getText())) {
                 this.controller.getDataRepository().addActionToPetType(selected, element.getText());

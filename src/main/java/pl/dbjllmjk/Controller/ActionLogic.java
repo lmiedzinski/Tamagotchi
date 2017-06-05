@@ -6,7 +6,6 @@ import pl.dbjllmjk.Model.PetTransactionException;
 
 import java.time.LocalDateTime;
 
-
 /**
  * Klasa z logiką dotyczącą aktywności
  */
@@ -27,9 +26,9 @@ public class ActionLogic {
         if (a == null) {
             throw new PetTransactionException("No such action");
         }
-        if (a.getValue() > p.getHunger())
+        if (a.getValue() > p.getHunger()) {
             throw new PetTransactionException("You can't feed pet more than " + p.getHunger());
-        else {
+        } else {
             p.setHunger(p.getHunger() - a.getValue());
             p.setLastFeedingDate(LocalDateTime.now());
         }
@@ -51,9 +50,9 @@ public class ActionLogic {
         if (a == null) {
             throw new PetTransactionException("No such action");
         }
-        if (a.getValue() > 10 - p.getHappiness())
+        if (a.getValue() > 10 - p.getHappiness()) {
             throw new PetTransactionException("You can't play with pet more than " + (10 - p.getHappiness()));
-        else {
+        } else {
             p.setHappiness(p.getHappiness() + a.getValue());
             p.setLastActivityDate(LocalDateTime.now());
         }
@@ -75,9 +74,9 @@ public class ActionLogic {
         if (a == null) {
             throw new PetTransactionException("No such action");
         }
-        if (a.getValue() > 10 - p.getHealth())
+        if (a.getValue() > 10 - p.getHealth()) {
             throw new PetTransactionException("You can't make operation on pet more than " + (10 - p.getHealth()));
-        else {
+        } else {
             p.setHealth(p.getHealth() + a.getValue());
             p.setLastOperationDate(LocalDateTime.now());
         }

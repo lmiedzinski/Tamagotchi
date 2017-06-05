@@ -1,6 +1,5 @@
 package pl.dbjllmjk.Controller;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -60,7 +59,10 @@ public class LoginController {
         if (login.trim().length() < 3 || password.trim().length() < 3 || name.trim().length() < 3 || surname.trim().length() < 3) {
             throw new NoSuchUserException("To short fields!");
         }
-        Optional<UserData> oud = this.controller.getDataRepository().getUsers().stream().filter(l -> l.getLogin().equals(login)).findFirst();
+        Optional<UserData> oud = this.controller.getDataRepository().getUsers()
+                .stream()
+                .filter(l -> l.getLogin().equals(login))
+                .findFirst();
         if (oud.isPresent()) {
             throw new NoSuchUserException("User " + login + " already exists");
         }

@@ -85,7 +85,10 @@ public class UserController {
      */
     public Object[] getAvaliableFoodTypesForPet(String name) throws PetTransactionException {
         List<Action> foods = new ArrayList<>();
-        Optional<Pet> pet = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> pet = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!pet.isPresent()) {
             throw new PetTransactionException("Error: Pet not found");
         }
@@ -107,7 +110,10 @@ public class UserController {
      */
     public Object[] getAvaliableActivityTypesForPet(String name) throws PetTransactionException {
         List<Action> activities = new ArrayList<>();
-        Optional<Pet> pet = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> pet = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!pet.isPresent()) {
             throw new PetTransactionException("Error: Pet not found");
         }
@@ -129,7 +135,10 @@ public class UserController {
      */
     public Object[] getAvaliableOperationTypesForPet(String name) throws PetTransactionException {
         List<Action> operations = new ArrayList<>();
-        Optional<Pet> pet = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> pet = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!pet.isPresent()) {
             throw new PetTransactionException("Error: Pet not found");
         }
@@ -164,7 +173,7 @@ public class UserController {
         }
         LocalDateTime daty = LocalDateTime.now();
         Pet p = new Pet(name, type, 0, Double.parseDouble((r.nextInt(100) + 15) + "." + r.nextInt(100)), daty, 5, 5, 5,
-                new ArrayList<Action>(), daty, daty, daty);
+                new ArrayList<>(), daty, daty, daty);
         this.controller.getDataRepository().addPet(p, this.loggedUser);
         this.controller.makeLogicUpdate();
         this.loggedUser.updatePets(this.getPetsForUser());
@@ -177,7 +186,10 @@ public class UserController {
      * @throws PetTransactionException
      */
     public void deletePet(String name) throws PetTransactionException {
-        Optional<Pet> p = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> p = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!p.isPresent()) {
             throw new PetTransactionException("You don't have pet " + name);
         }
@@ -199,7 +211,10 @@ public class UserController {
      * @throws PetTransactionException
      */
     public String[] getPetData(String name) throws PetTransactionException {
-        Optional<Pet> p = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> p = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!p.isPresent()) {
             throw new PetTransactionException("You don't have pet " + name);
         }
@@ -208,8 +223,10 @@ public class UserController {
         petData[1] = p.get().getType();
         petData[2] = Integer.toString(p.get().getAge());
         petData[3] = Double.toString(p.get().getWeight());
-        petData[4] = p.get().getBirthDate().getYear() + "/" + p.get().getBirthDate().getMonth() + "/"
-                + p.get().getBirthDate().getDayOfMonth() + " " + p.get().getBirthDate().getHour() + ":"
+        petData[4] = p.get().getBirthDate().getYear() + "/" 
+                + p.get().getBirthDate().getMonth() + "/"
+                + p.get().getBirthDate().getDayOfMonth() + " " 
+                + p.get().getBirthDate().getHour() + ":"
                 + p.get().getBirthDate().getMinute();
         petData[5] = Integer.toString(p.get().getHappiness());
         petData[6] = Integer.toString(p.get().getHunger());
@@ -228,7 +245,10 @@ public class UserController {
         if (foodType == null) {
             throw new PetTransactionException("No food selected!");
         }
-        Optional<Pet> p = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> p = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!p.isPresent()) {
             throw new PetTransactionException("You don't have pet: " + name);
         }
@@ -255,7 +275,10 @@ public class UserController {
         if (playType == null) {
             throw new PetTransactionException("No activity selected!");
         }
-        Optional<Pet> p = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> p = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!p.isPresent()) {
             throw new PetTransactionException("You don't have pet: " + name);
         }
@@ -282,7 +305,10 @@ public class UserController {
         if (operationType == null) {
             throw new PetTransactionException("No operation selected!");
         }
-        Optional<Pet> p = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> p = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!p.isPresent()) {
             throw new PetTransactionException("You don't have pet: " + name);
         }
@@ -311,13 +337,18 @@ public class UserController {
         if (importedPet == null) {
             throw new PetTransactionException("Couldn't import pet!");
         }
-        Optional<Pet> pet = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(importedPet.getName())).findFirst();
+        Optional<Pet> pet = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(importedPet.getName()))
+                .findFirst();
         if (pet.isPresent()) {
             if (force) {
                 this.controller.getDataRepository().removePet(pet.get());
             } else {
-                throw new PetTransactionException("You already have pet \'" + importedPet.getName() + "\'!\nOld - "
-                        + pet.get().getType() + ", New - " + importedPet.getType());
+                throw new PetTransactionException("You already have pet \'" 
+                        + importedPet.getName() + "\'!\nOld - "
+                        + pet.get().getType() + ", New - " 
+                        + importedPet.getType());
             }
         }
         this.controller.getDataRepository().addPet(importedPet, this.loggedUser);
@@ -337,7 +368,10 @@ public class UserController {
             fileName += ".xml";
             path += fileName;
         }
-        Optional<Pet> selectedPet = this.loggedUser.getPets().stream().filter(l -> l.getName().equals(name)).findFirst();
+        Optional<Pet> selectedPet = this.loggedUser.getPets()
+                .stream()
+                .filter(l -> l.getName().equals(name))
+                .findFirst();
         if (!selectedPet.isPresent()) {
             throw new PetTransactionException("You don't have pet: " + name);
         }
