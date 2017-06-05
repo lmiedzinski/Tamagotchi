@@ -5,6 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.*;
 
@@ -73,6 +77,8 @@ public class LoginView extends JFrame implements ActionListener {
                 } catch (NoSuchUserException e) {
                     JOptionPane.showMessageDialog(this, e.getMessage() + "\n( ͡° ͜ʖ ͡°)", "Error",
                             JOptionPane.ERROR_MESSAGE);
+                } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                    Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -87,6 +93,8 @@ public class LoginView extends JFrame implements ActionListener {
             } catch (BadPasswordException e) {
                 JOptionPane.showMessageDialog(this, "Bad password!\n( ͡° ͜ʖ ͡°)", "Warning",
                         JOptionPane.WARNING_MESSAGE);
+            } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (arg0.getSource() == authorsButton) {

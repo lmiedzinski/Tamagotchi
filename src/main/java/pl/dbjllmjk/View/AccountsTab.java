@@ -3,6 +3,10 @@ package pl.dbjllmjk.View;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -81,6 +85,8 @@ public class AccountsTab extends JPanel implements ActionListener {
                 } catch (NoSuchUserException e) {
                     JOptionPane.showMessageDialog(this, e.getMessage() + "\n( ͡° ͜ʖ ͡°)", "Error",
                             JOptionPane.ERROR_MESSAGE);
+                } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+                    Logger.getLogger(AccountsTab.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
