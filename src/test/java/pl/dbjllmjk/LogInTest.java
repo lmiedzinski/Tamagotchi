@@ -23,14 +23,45 @@ public class LogInTest {
     private Logger logger = LoggerFactory.getLogger(AdminViewTest.class);
 
     @Test(expected = NoSuchUserException.class)
-    public void LoginWithBadIDTest() throws NoSuchUserException,BadPasswordException {
+    public void LoginWithBadIDTest() throws NoSuchUserException, BadPasswordException {
         LoginController ln = new LoginController(new Controller());
         ln.tryToLog("uwgfyagfuykgayfgkajfgaekfagyfgk", "gneyshgkshukhi");
     }
-    
+
     @Test(expected = BadPasswordException.class)
-    public void LoginWithPwTest() throws NoSuchUserException,BadPasswordException {
+    public void LoginWithBadPwTest() throws NoSuchUserException, BadPasswordException {
         LoginController ln = new LoginController(new Controller());
         ln.tryToLog("admin", "gneyshgkshukhi");
     }
+
+    @Test
+    public void CorrectLoginTest() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.tryToLog("admin", "admin");
+    }
+
+    @Test(expected = NoSuchUserException.class)
+    public void CreateAccountByUserTest0() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.addAccount("a", "aaaaa", "aaaa", "aaaa");
+    }
+
+    @Test(expected = NoSuchUserException.class)
+    public void CreateAccountByUserTest1() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.addAccount("aaaa", "a", "aaaa", "aaaa");
+    }
+
+    @Test(expected = NoSuchUserException.class)
+    public void CreateAccountByUserTest2() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.addAccount("aaaa", "aaaaa", "a", "aaaa");
+    }
+
+    @Test(expected = NoSuchUserException.class)
+    public void CreateAccountByUserTest3() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.addAccount("aaaa", "aaaaa", "aaaa", "a");
+    }
+
 }
