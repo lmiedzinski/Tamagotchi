@@ -19,8 +19,11 @@ import com.healthmarketscience.jackcess.Table;
 
 /**
  * Class which is repsonsible for connection with MS_ACCESS DATABASE. Basic
- * operations:<br>
- * -Read<br>-Write<br>-Modify<br>-Delete<br>
+ * operations:
+ * -Read
+ * -Write
+ * -Modify
+ * -Delete
  */
 public class DataRepository {
 
@@ -52,8 +55,8 @@ public class DataRepository {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        users = new ArrayList<UserData>();
-        admins = new ArrayList<AdminData>();
+        users = new ArrayList<>();
+        admins = new ArrayList<>();
         admins = this.getAdmins();
         users = this.getUsers();
     }
@@ -63,7 +66,7 @@ public class DataRepository {
      * @return List of {@link Action}s for {@link Pet} given in {@link Row}.
      */
     private List<Action> getActionsForPet(Row row) {
-        List<Action> actions = new ArrayList<Action>();
+        List<Action> actions = new ArrayList<>();
         try {
             //Activities
             IndexCursor ac = CursorBuilder.createCursor(data.getTable("PetTypeActivities").getIndex("PetTypeID"));
@@ -100,13 +103,13 @@ public class DataRepository {
      */
     @SuppressWarnings("deprecation")
     public List<UserData> getUsers() {
-        List<UserData> userData = new ArrayList<UserData>();
+        List<UserData> userData = new ArrayList<>();
         try {
             Table userTable = data.getTable("Users");
             for (Row r : userTable) {
                 UserData ud = new UserData((String) r.get("userLogin"), (String) r.get("userPassword"), (String) r.get("userName"), (String) r.get("userSurname"));
-                List<Pet> pets = new ArrayList<Pet>();
-                List<Integer> temp = new ArrayList<Integer>();
+                List<Pet> pets = new ArrayList<>();
+                List<Integer> temp = new ArrayList<>();
                 Table userPetsTable = data.getTable("UserPets");
                 Table petTypesTable = data.getTable("PetTypes");
                 Table petsTable = data.getTable("Pets");
@@ -123,9 +126,9 @@ public class DataRepository {
                     LocalDateTime dataUrodzin = LocalDateTime.of(row.getDate("birthDate").getYear(), row.getDate("birthDate").getMonth() + 1, row.getDate("birthDate").getDate(), 0, 0);
                     pets.add(new Pet((String) row.get("petName"), (String) row2.get("petTypeName"), (Integer) row.get("petAge"), (Integer) row.get("petWeight"), dataKarmienia, (Integer) row.get("happiness"), (Integer) row.get("hunger"), (Integer) row.get("health"), this.getActionsForPet(row), dataAktywnosci, dataOperacji, dataUrodzin));
                 }
-                for (Pet pet : pets) {
+                pets.forEach((pet) -> {
                     ud.addPet(pet);
-                }
+                });
                 userData.add(ud);
             }
         } catch (IOException e) {
@@ -138,7 +141,7 @@ public class DataRepository {
      * @return All admin accounts ({@link AdminData}) data from database file.
      */
     public List<AdminData> getAdmins() {
-        List<AdminData> adminData = new ArrayList<AdminData>();
+        List<AdminData> adminData = new ArrayList<>();
         try {
             Table adminTable = data.getTable("Admins");
             for (Row r : adminTable) {
@@ -154,7 +157,7 @@ public class DataRepository {
      * @return All available {@link Pet} types/species from database file.
      */
     public String[] getAvaliablePetTypes() {
-        List<String> tab = new ArrayList<String>();
+        List<String> tab = new ArrayList<>();
         String[] s = null;
         try {
             Table petTypes = data.getTable("PetTypes");
@@ -221,13 +224,13 @@ public class DataRepository {
      */
     @SuppressWarnings("deprecation")
     public List<Pet> getPetsForUser(UserData ud) {
-        List<Pet> petList = new ArrayList<Pet>();
+        List<Pet> petList = new ArrayList<>();
         try {
             Table usersTable = data.getTable("Users");
             Table userPetsTable = data.getTable("UserPets");
             Table petsTable = data.getTable("Pets");
             Table petTypesTable = data.getTable("PetTypes");
-            List<Integer> temp = new ArrayList<Integer>();
+            List<Integer> temp = new ArrayList<>();
             Row user = CursorBuilder.findRow(usersTable, Collections.singletonMap("userLogin", ud.getLogin()));
             IndexCursor user2pets = CursorBuilder.createCursor(userPetsTable.getIndex("UserID"));
             for (Row u : user2pets.newEntryIterable(user.get("UserID"))) {
@@ -251,6 +254,7 @@ public class DataRepository {
     /**
      * Add user or admin account to database file.
      *
+     * @param <T> type
      * @param t instance of {@link AccountData} providing data of an account.
      */
     public <T> void addData(T t) {
@@ -281,7 +285,7 @@ public class DataRepository {
             Table petsTable = data.getTable("Pets");
             Row userRow = CursorBuilder.findRow(usersTable, Collections.singletonMap("userLogin", ud.getLogin()));
             IndexCursor user2Pets = CursorBuilder.createCursor(userPetsTable.getIndex("UserID"));
-            List<Integer> temp = new ArrayList<Integer>();
+            List<Integer> temp = new ArrayList<>();
             for (Row user2pet : user2Pets.newEntryIterable(userRow.get("UserID"))) {
                 temp.add((Integer) user2pet.get("PetID"));
             }
@@ -378,6 +382,7 @@ public class DataRepository {
     /**
      * Add {@link Action} type to database file.
      *
+     * @param <T> type
      * @param t instance of {@link Action} class providing reasonable data.
      */
     public <T> void addAction(T t) {
@@ -401,6 +406,7 @@ public class DataRepository {
     /**
      * Delete {@link Action} type and its relations from database file.
      *
+     * @param <T> type
      * @param t instance of {@link Action} class.
      */
     public <T> void removeAction(T t) {
@@ -445,6 +451,7 @@ public class DataRepository {
     /**
      * Connect {@link Action} with {@link Pet} in database file.
      *
+     * @param <T> type
      * @param t {@link Action} object.
      * @param petTypeName name of {@link Pet} type.
      */
@@ -485,6 +492,7 @@ public class DataRepository {
     /**
      * Disconnect {@link Action} from {@link Pet} in database file.
      *
+     * @param <T> type
      * @param t {@link Action} object.
      * @param petTypeName name of {@link Pet} type.
      */
@@ -572,7 +580,7 @@ public class DataRepository {
      * @return Types/species of {@link Pet} for paricular {@link Action}
      */
     public List<String> getPetTypesForAction(Action t) {
-        List<String> pets = new ArrayList<String>();
+        List<String> pets = new ArrayList<>();
         Table petActionTable = null;
         Table actionTable = null;
         String key = null;
@@ -597,7 +605,7 @@ public class DataRepository {
             }
             Row actionRow = CursorBuilder.findRow(actionTable, Collections.singletonMap(key, t.getName()));
             IndexCursor petActionCursor = CursorBuilder.createCursor(petActionTable.getIndex(index));
-            List<Integer> temp = new ArrayList<Integer>();
+            List<Integer> temp = new ArrayList<>();
             for (Row r : petActionCursor.newEntryIterable(actionRow.get(index))) {
                 temp.add(r.getInt("PetTypeID"));
             }
@@ -612,12 +620,13 @@ public class DataRepository {
     }
 
     /**
+     * @param <T> type
      * @param t specifies the type of {@link Action}.
      * @return All {@link Action}s available in database file.
      */
     @SuppressWarnings("unchecked")
     public <T> List<T> getAllActions(T t) {
-        List<T> lista = new ArrayList<T>();
+        List<T> lista = new ArrayList<>();
         Table actionTable;
         Cursor actionCursor;
         try {
