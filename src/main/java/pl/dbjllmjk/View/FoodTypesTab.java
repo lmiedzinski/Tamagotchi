@@ -19,7 +19,7 @@ import javax.swing.event.ListSelectionListener;
 import pl.dbjllmjk.Controller.AdminController;
 import pl.dbjllmjk.Model.Action;
 import pl.dbjllmjk.Model.Food;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 public class FoodTypesTab extends JPanel implements ActionListener, ListSelectionListener {
 

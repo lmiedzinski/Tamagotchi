@@ -1,4 +1,4 @@
-package pl.dbjllmjk.Model;
+package pl.dbjllmjk.Utils;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import com.thoughtworks.xstream.XStream;
+import pl.dbjllmjk.Model.Pet;
 
 /**
  * XmlConverter provides importing and exporting {@link Pet} objects to/from XML

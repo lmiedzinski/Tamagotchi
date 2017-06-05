@@ -12,9 +12,9 @@ import pl.dbjllmjk.Model.Food;
 import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.PetEntry;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 import pl.dbjllmjk.Model.UserData;
-import pl.dbjllmjk.Model.XmlConverter;
+import pl.dbjllmjk.Utils.XmlConverter;
 import pl.dbjllmjk.View.UserView;
 
 /**

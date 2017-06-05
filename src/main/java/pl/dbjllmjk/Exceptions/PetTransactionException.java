@@ -1,4 +1,4 @@
-package pl.dbjllmjk.Model;
+package pl.dbjllmjk.Exceptions;
 
 /**
  * {@link Exception} thrown when performing operation on {@link Pet} fails.

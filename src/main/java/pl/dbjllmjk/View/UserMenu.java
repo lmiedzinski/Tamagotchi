@@ -19,7 +19,7 @@ import javax.swing.JScrollPane;
 
 import pl.dbjllmjk.Controller.UserController;
 import pl.dbjllmjk.Model.PetEntry;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 public class UserMenu extends JPanel implements ActionListener {
 

@@ -9,8 +9,8 @@ import java.awt.event.KeyListener;
 import javax.swing.*;
 
 import pl.dbjllmjk.Controller.LoginController;
-import pl.dbjllmjk.Model.BadPasswordException;
-import pl.dbjllmjk.Model.NoSuchUserException;
+import pl.dbjllmjk.Exceptions.BadPasswordException;
+import pl.dbjllmjk.Exceptions.NoSuchUserException;
 
 public class LoginView extends JFrame implements ActionListener {
 

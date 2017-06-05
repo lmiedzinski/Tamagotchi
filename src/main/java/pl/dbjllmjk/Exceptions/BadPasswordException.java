@@ -1,4 +1,4 @@
-package pl.dbjllmjk.Model;
+package pl.dbjllmjk.Exceptions;
 
 /**
  * {@link Exception} thrown in case of incorrect password given while logging.

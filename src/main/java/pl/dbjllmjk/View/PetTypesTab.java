@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import pl.dbjllmjk.Controller.AdminController;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 public class PetTypesTab extends JPanel implements ActionListener {
 

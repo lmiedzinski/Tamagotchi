@@ -17,7 +17,7 @@ import javax.swing.JProgressBar;
 
 import pl.dbjllmjk.Controller.UserController;
 import pl.dbjllmjk.Model.Action;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 public class UserPet extends JPanel implements ActionListener {
 

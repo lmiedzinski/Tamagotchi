@@ -18,7 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import pl.dbjllmjk.Controller.UserController;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 public class UserView extends JFrame implements WindowListener, ActionListener {
 

@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 import pl.dbjllmjk.Controller.AdminController;
 import pl.dbjllmjk.Model.AccountData;
-import pl.dbjllmjk.Model.NoSuchUserException;
+import pl.dbjllmjk.Exceptions.NoSuchUserException;
 
 public class AccountsTab extends JPanel implements ActionListener {
 
