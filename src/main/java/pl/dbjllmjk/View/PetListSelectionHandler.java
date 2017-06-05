@@ -4,16 +4,17 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 class PetListSelectionHandler implements ListSelectionListener {
-	private UserMenu userMenu;
 
-	public PetListSelectionHandler(UserMenu userMenu) {
-		this.userMenu = userMenu;
-	}
+    private UserMenu userMenu;
 
-	@Override
-	public void valueChanged(ListSelectionEvent arg0) {
-		this.userMenu.selectionMade();
+    public PetListSelectionHandler(UserMenu userMenu) {
+        this.userMenu = userMenu;
+    }
 
-	}
+    @Override
+    public void valueChanged(ListSelectionEvent arg0) {
+        this.userMenu.selectionMade();
+
+    }
 
 }
