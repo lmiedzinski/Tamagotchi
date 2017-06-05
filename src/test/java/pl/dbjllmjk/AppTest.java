@@ -18,6 +18,8 @@ import pl.dbjllmjk.Model.Activity;
 import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.UserData;
+import pl.dbjllmjk.Model.Activity;
+import pl.dbjllmjk.Model.Operation;
 
 /**
  * Unit test for simple App.
