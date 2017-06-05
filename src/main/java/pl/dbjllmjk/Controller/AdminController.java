@@ -1,13 +1,13 @@
 package pl.dbjllmjk.Controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import javax.swing.JCheckBox;
 
 import pl.dbjllmjk.Model.AccountData;
 import pl.dbjllmjk.Model.Action;
@@ -217,18 +217,18 @@ public class AdminController {
      * @param action
      * @return An array of available checkboxes for {@link Pet}.
      */
-    public JCheckBox[] getActionWithTypeConnections(Action action) {
-        List<JCheckBox> ret = new ArrayList<>();
+    public Map<String,Boolean> getActionWithTypeConnections(Action action) {
+        Map<String,Boolean> ret = new HashMap<>();
         Arrays.asList(this.controller.getDataRepository().getAvaliablePetTypes())
                 .stream()
                 .forEach((petType) -> {
                     if (action == null) {
-                        ret.add(new JCheckBox(petType, false));
+                        ret.put(petType, false);
                     } else {
-                        ret.add(new JCheckBox(petType, (this.controller.getDataRepository().getPetTypesForAction(action).contains(petType))));
+                        ret.put(petType, (this.controller.getDataRepository().getPetTypesForAction(action).contains(petType)));
                     }
                 });
-        return ret.toArray(new JCheckBox[ret.size()]);
+        return ret;
     }
 
     /**
@@ -314,14 +314,14 @@ public class AdminController {
      * @param selected {@link Action}
      * @throws PetTransactionException
      */
-    public void updateActionWithTypeConnections(List<JCheckBox> updated, Action selected) throws PetTransactionException {
+    public void updateActionWithTypeConnections(Map<String,Boolean> updated, Action selected) throws PetTransactionException {
         boolean[] flag = new boolean[]{false};
-        updated.stream().forEach((element) -> {
-            if (element.isSelected() && !this.controller.getDataRepository().getPetTypesForAction(selected).contains(element.getText())) {
-                this.controller.getDataRepository().addActionToPetType(selected, element.getText());
+        updated.forEach((key,value) -> {
+            if (value && !this.controller.getDataRepository().getPetTypesForAction(selected).contains(key)) {
+                this.controller.getDataRepository().addActionToPetType(selected, key);
                 flag[0] = true;
-            } else if (!element.isSelected() && this.controller.getDataRepository().getPetTypesForAction(selected).contains(element.getText())) {
-                this.controller.getDataRepository().removeActionFromPetType(selected, element.getText());
+            } else if (!value && this.controller.getDataRepository().getPetTypesForAction(selected).contains(key)) {
+                this.controller.getDataRepository().removeActionFromPetType(selected, key);
                 flag[0] = true;
             }
         });
