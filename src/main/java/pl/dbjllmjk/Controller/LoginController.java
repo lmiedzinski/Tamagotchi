@@ -45,9 +45,6 @@ public class LoginController {
         if (!selectedAccount.isPresent()) {
             throw new NoSuchUserException();
         }
-//        if (!selectedAccount.get().getPassword().equals(password)) {
-//            throw new BadPasswordException();
-//        }
         if (!PasswordHashConverter.checkPassword(selectedAccount.get().getLogin(), password, selectedAccount.get().getPassword())){
             throw new BadPasswordException();
         }
