@@ -104,10 +104,10 @@ public class OperationTypesTab extends JPanel implements ActionListener, ListSel
             }
         }
         if (arg0.getSource() == this.saveChangesButton) {
-            Map<String,Boolean> updated = new HashMap<>();
+            Map<String, Boolean> updated = new HashMap<>();
             for (int i = 0; i < this.connectionsList.getModel().getSize(); i++) {
                 JCheckBox box = (JCheckBox) this.connectionsList.getModel().getElementAt(i);
-                updated.put(box.getText(),box.isSelected());
+                updated.put(box.getText(), box.isSelected());
             }
             try {
                 this.adminController.updateActionWithTypeConnections(updated, this.operationTypeList.getSelectedValue());
@@ -125,7 +125,7 @@ public class OperationTypesTab extends JPanel implements ActionListener, ListSel
     public void valueChanged(ListSelectionEvent arg0) {
         Action selectedValue = this.operationTypeList.getSelectedValue();
         this.connectionsModel.clear();
-        for (Map.Entry<String,Boolean> entry : this.adminController.getActionWithTypeConnections(selectedValue).entrySet()) {
+        for (Map.Entry<String, Boolean> entry : this.adminController.getActionWithTypeConnections(selectedValue).entrySet()) {
             connectionsModel.addElement(new JCheckBox(entry.getKey(), entry.getValue()));
         }
     }

@@ -102,10 +102,10 @@ public class ActivityTypesTab extends JPanel implements ActionListener, ListSele
             }
         }
         if (arg0.getSource() == this.saveChangesButton) {
-            Map<String,Boolean> updated = new HashMap<>();
+            Map<String, Boolean> updated = new HashMap<>();
             for (int i = 0; i < this.connectionsList.getModel().getSize(); i++) {
                 JCheckBox box = (JCheckBox) this.connectionsList.getModel().getElementAt(i);
-                updated.put(box.getText(),box.isSelected());
+                updated.put(box.getText(), box.isSelected());
             }
             try {
                 this.adminController.updateActionWithTypeConnections(updated, this.activityTypeList.getSelectedValue());
