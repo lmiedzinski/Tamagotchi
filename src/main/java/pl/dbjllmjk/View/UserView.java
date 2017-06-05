@@ -74,6 +74,7 @@ public class UserView extends JFrame implements WindowListener, ActionListener {
         add(this.tabbedPane);
     }
 
+    @Override
     public void windowClosing(WindowEvent e) {
         this.userController.logout();
     }

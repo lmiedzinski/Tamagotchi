@@ -102,7 +102,7 @@ public class FoodTypesTab extends JPanel implements ActionListener, ListSelectio
             }
         }
         if (arg0.getSource() == this.saveChangesButton) {
-            List<JCheckBox> updated = new ArrayList<JCheckBox>();
+            List<JCheckBox> updated = new ArrayList<>();
             for (int i = 0; i < this.connectionsList.getModel().getSize(); i++) {
                 updated.add((JCheckBox) this.connectionsList.getModel().getElementAt(i));
             }
