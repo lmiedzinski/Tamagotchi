@@ -1,5 +1,7 @@
 package pl.dbjllmjk.Controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +20,7 @@ import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Exceptions.PetTransactionException;
 import pl.dbjllmjk.Model.UserData;
+import pl.dbjllmjk.Utils.PasswordHashConverter;
 import pl.dbjllmjk.View.AdminView;
 
 /**
@@ -60,9 +63,11 @@ public class AdminController {
      * @param surname user/admin surname.
      * @param isAdmin if new account should be for admin.
      * @throws NoSuchUserException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
      */
     public void addAccount(String login, String password, String name, String surname, boolean isAdmin)
-            throws NoSuchUserException {
+            throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         if (login.trim().length() < 3 || password.trim().length() < 3 || name.trim().length() < 3 || surname.trim().length() < 3) {
             throw new NoSuchUserException("To short fields!");
         }
@@ -76,7 +81,7 @@ public class AdminController {
             if (ad != null) {
                 throw new NoSuchUserException("Admin " + login + " already exists");
             }
-            AdminData newAdmin = new AdminData(login, password, name, surname);
+            AdminData newAdmin = new AdminData(login, PasswordHashConverter.hashPassword(login, password), name, surname);
             this.controller.getDataRepository().addData(newAdmin);
         } else {
             Optional<UserData> oud = this.controller.getDataRepository()
@@ -88,7 +93,7 @@ public class AdminController {
             if (ud != null) {
                 throw new NoSuchUserException("User " + login + " already exists");
             }
-            UserData newUser = new UserData(login, password, name, surname);
+            UserData newUser = new UserData(login, PasswordHashConverter.hashPassword(login, password), name, surname);
             this.controller.getDataRepository().addData(newUser);
         }
     }

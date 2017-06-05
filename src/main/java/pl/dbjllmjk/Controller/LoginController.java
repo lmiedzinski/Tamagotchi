@@ -1,5 +1,7 @@
 package pl.dbjllmjk.Controller;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -7,6 +9,7 @@ import pl.dbjllmjk.Model.AccountData;
 import pl.dbjllmjk.Exceptions.BadPasswordException;
 import pl.dbjllmjk.Exceptions.NoSuchUserException;
 import pl.dbjllmjk.Model.UserData;
+import pl.dbjllmjk.Utils.PasswordHashConverter;
 import pl.dbjllmjk.View.LoginView;
 
 /**
@@ -28,8 +31,10 @@ public class LoginController {
      * @param password user/admin password
      * @throws NoSuchUserException
      * @throws BadPasswordException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
      */
-    public void tryToLog(String login, String password) throws NoSuchUserException, BadPasswordException {
+    public void tryToLog(String login, String password) throws NoSuchUserException, BadPasswordException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Optional<AccountData> selectedAccount = Stream
                 .concat(this.controller.getDataRepository().getAdmins().stream(),
                         this.controller.getDataRepository().getUsers().stream())
@@ -40,9 +45,13 @@ public class LoginController {
         if (!selectedAccount.isPresent()) {
             throw new NoSuchUserException();
         }
-        if (!selectedAccount.get().getPassword().equals(password)) {
+//        if (!selectedAccount.get().getPassword().equals(password)) {
+//            throw new BadPasswordException();
+//        }
+        if (!PasswordHashConverter.checkPassword(selectedAccount.get().getLogin(), password, selectedAccount.get().getPassword())){
             throw new BadPasswordException();
         }
+        
         this.controller.afterLogin(selectedAccount.get());
     }
 
@@ -54,8 +63,10 @@ public class LoginController {
      * @param name new account name
      * @param surname new account surname
      * @throws NoSuchUserException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
      */
-    public void addAccount(String login, String password, String name, String surname) throws NoSuchUserException {
+    public void addAccount(String login, String password, String name, String surname) throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         if (login.trim().length() < 3 || password.trim().length() < 3 || name.trim().length() < 3 || surname.trim().length() < 3) {
             throw new NoSuchUserException("To short fields!");
         }
@@ -66,7 +77,7 @@ public class LoginController {
         if (oud.isPresent()) {
             throw new NoSuchUserException("User " + login + " already exists");
         }
-        UserData newUser = new UserData(login, password, name, surname);
+        UserData newUser = new UserData(login, PasswordHashConverter.hashPassword(login, password), name, surname);
         this.controller.getDataRepository().addData(newUser);
     }
 }
