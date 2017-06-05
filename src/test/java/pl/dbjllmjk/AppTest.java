@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
  * Unit test for simple App.
  */
 public class AppTest {
+
     private Logger logger = LoggerFactory.getLogger(AppTest.class);
 
     @Test

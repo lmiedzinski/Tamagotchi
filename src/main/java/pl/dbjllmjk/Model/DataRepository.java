@@ -19,11 +19,7 @@ import com.healthmarketscience.jackcess.Table;
 
 /**
  * Class which is repsonsible for connection with MS_ACCESS DATABASE. Basic
- * operations:
- * -Read
- * -Write
- * -Modify
- * -Delete
+ * operations: -Read -Write -Modify -Delete
  */
 public class DataRepository {
 

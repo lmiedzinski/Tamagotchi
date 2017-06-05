@@ -3,8 +3,8 @@ package pl.dbjllmjk.View;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -41,9 +41,9 @@ public class FoodTypesTab extends JPanel implements ActionListener, ListSelectio
         foodTypeList = new JList<>(petTypes);
         foodTypeList.addListSelectionListener(this);
         connectionsModel = new DefaultListModel<>();
-        for (JCheckBox box : this.adminController.getActionWithTypeConnections(null)) {
-            connectionsModel.addElement(box);
-        }
+        this.adminController.getActionWithTypeConnections(null).entrySet().forEach((entry) -> {
+            connectionsModel.addElement(new JCheckBox(entry.getKey(), entry.getValue()));
+        });
         connectionsList = new CheckBoxList(connectionsModel);
         JPanel leftSide = new JPanel(new GridLayout(2, 1));
         JScrollPane foodScroll = new JScrollPane(foodTypeList);
@@ -102,9 +102,10 @@ public class FoodTypesTab extends JPanel implements ActionListener, ListSelectio
             }
         }
         if (arg0.getSource() == this.saveChangesButton) {
-            List<JCheckBox> updated = new ArrayList<>();
+            Map<String, Boolean> updated = new HashMap<>();
             for (int i = 0; i < this.connectionsList.getModel().getSize(); i++) {
-                updated.add((JCheckBox) this.connectionsList.getModel().getElementAt(i));
+                JCheckBox box = (JCheckBox) this.connectionsList.getModel().getElementAt(i);
+                updated.put(box.getText(), box.isSelected());
             }
             try {
                 this.adminController.updateActionWithTypeConnections(updated, this.foodTypeList.getSelectedValue());
@@ -122,9 +123,9 @@ public class FoodTypesTab extends JPanel implements ActionListener, ListSelectio
     public void valueChanged(ListSelectionEvent arg0) {
         Action selectedValue = this.foodTypeList.getSelectedValue();
         this.connectionsModel.clear();
-        for (JCheckBox box : this.adminController.getActionWithTypeConnections(selectedValue)) {
-            connectionsModel.addElement(box);
-        }
+        this.adminController.getActionWithTypeConnections(selectedValue).entrySet().forEach((entry) -> {
+            connectionsModel.addElement(new JCheckBox(entry.getKey(), entry.getValue()));
+        });
     }
 
 }
