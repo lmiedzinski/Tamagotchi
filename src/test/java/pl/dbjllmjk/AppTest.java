@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import pl.dbjllmjk.Controller.ActionLogic;
 import pl.dbjllmjk.Model.Food;
 import pl.dbjllmjk.Model.Pet;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 import java.time.LocalDateTime;
 
