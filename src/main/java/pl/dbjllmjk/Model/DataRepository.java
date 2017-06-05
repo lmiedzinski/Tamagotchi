@@ -18,11 +18,12 @@ import com.healthmarketscience.jackcess.Row;
 import com.healthmarketscience.jackcess.Table;
 
 /**
- * Class which is repsonsible for connection with MS_ACCESS DATABASE.
- * Basic operations:<br>
+ * Class which is repsonsible for connection with MS_ACCESS DATABASE. Basic
+ * operations:<br>
  * -Read<br>-Write<br>-Modify<br>-Delete<br>
  */
 public class DataRepository {
+
     /**
      * Property containing database file.
      */
@@ -41,8 +42,9 @@ public class DataRepository {
     private List<AdminData> admins;
 
     /**
-     * Default constructor initializes database field by loading data.mdb file in current directory.
-     * Additionally it loads all users and admins into memory.
+     * Default constructor initializes database field by loading data.mdb file
+     * in current directory. Additionally it loads all users and admins into
+     * memory.
      */
     public DataRepository() {
         try {
@@ -109,8 +111,9 @@ public class DataRepository {
                 Table petTypesTable = data.getTable("PetTypes");
                 Table petsTable = data.getTable("Pets");
                 IndexCursor c = CursorBuilder.createCursor(userPetsTable.getIndex("UserID"));
-                for (Row entry : c.newEntryIterable(r.get("UserID")))
+                for (Row entry : c.newEntryIterable(r.get("UserID"))) {
                     temp.add((Integer) entry.get("PetID")); //przez tablic� UserPets
+                }
                 for (Integer i : temp) {
                     Row row = CursorBuilder.findRowByPrimaryKey(petsTable, i);
                     Row row2 = CursorBuilder.findRowByPrimaryKey(petTypesTable, (Integer) row.get("PetTypeID"));
@@ -186,8 +189,9 @@ public class DataRepository {
     /**
      * Add {@link Pet} and its relations to database file.
      *
-     * @param p  instance of {@link Pet} class.
-     * @param ud instance of {@link UserData} class to specify user for {@link Pet}.
+     * @param p instance of {@link Pet} class.
+     * @param ud instance of {@link UserData} class to specify user for
+     * {@link Pet}.
      */
     @SuppressWarnings("deprecation")
     public void addPet(Pet p, UserData ud) {
@@ -212,7 +216,8 @@ public class DataRepository {
 
     /**
      * @param ud user account.
-     * @return All {@link Pet}s for specified user ({@link UserData}) from database file.
+     * @return All {@link Pet}s for specified user ({@link UserData}) from
+     * database file.
      */
     @SuppressWarnings("deprecation")
     public List<Pet> getPetsForUser(UserData ud) {
@@ -256,8 +261,9 @@ public class DataRepository {
             } else if (t instanceof UserData) {
                 dataTable = data.getTable("Users");
             }
-            if (dataTable != null)
+            if (dataTable != null) {
                 dataTable.addRow(Column.AUTO_NUMBER, (String) ((AccountData) t).getLogin(), (String) ((AccountData) t).getPassword(), (String) ((AccountData) t).getName(), (String) ((AccountData) t).getSurname());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -384,8 +390,9 @@ public class DataRepository {
             } else if (t instanceof Activity) {
                 actionTable = data.getTable("Activities");
             }
-            if (actionTable != null)
+            if (actionTable != null) {
                 actionTable.addRow(Column.AUTO_NUMBER, ((Action) t).getName(), ((Action) t).getValue());
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -438,7 +445,7 @@ public class DataRepository {
     /**
      * Connect {@link Action} with {@link Pet} in database file.
      *
-     * @param t           {@link Action} object.
+     * @param t {@link Action} object.
      * @param petTypeName name of {@link Pet} type.
      */
     public <T> void addActionToPetType(T t, String petTypeName) {
@@ -478,7 +485,7 @@ public class DataRepository {
     /**
      * Disconnect {@link Action} from {@link Pet} in database file.
      *
-     * @param t           {@link Action} object.
+     * @param t {@link Action} object.
      * @param petTypeName name of {@link Pet} type.
      */
     public <T> void removeActionFromPetType(T t, String petTypeName) {
