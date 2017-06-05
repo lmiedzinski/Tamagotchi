@@ -6,6 +6,8 @@
 package pl.dbjllmjk;
 
 import com.healthmarketscience.jackcess.Database;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.AfterClass;
@@ -18,7 +20,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.dbjllmjk.Controller.Controller;
+import pl.dbjllmjk.Controller.LoginController;
+import pl.dbjllmjk.Model.Activity;
+import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.DataRepository;
+import pl.dbjllmjk.Model.Food;
+import pl.dbjllmjk.Model.Operation;
+import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.UserData;
 
 
@@ -41,6 +50,7 @@ public class DataRepositoryTest {
     public static void tearDown(){
         mockedDataRepository = null;
     }
+    
     
     @Test
     public void testGetUsersSize()
@@ -105,5 +115,87 @@ public class DataRepositoryTest {
         List<UserData> users = mockedDataRepository.getUsers();
         
         assertEquals("Almighty", users.get(0).getSurname());
+    }
+    
+    @Test
+    public void testGetUsersWithPets()
+    {
+        UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
+        
+        LocalDateTime daty = LocalDateTime.now();
+        Pet pet1 = new Pet("pet1", "type1", 0, 10, daty, 5, 5, 5,
+                new ArrayList<>(), daty, daty, daty);
+        user1.addPet(pet1);
+        
+        when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1));
+        
+        List<UserData> users = mockedDataRepository.getUsers();
+        
+        assertEquals(pet1, users.get(0).getPets().get(0));
+    }
+    
+    @Test
+    public void testGetAdminsSize()
+    {
+        AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
+        AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
+        
+        when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        List<AdminData> admins = mockedDataRepository.getAdmins();
+        
+        assertEquals(2, admins.size());
+    }
+    
+    @Test
+    public void testGetAdminsLogin()
+    {
+        AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
+        AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
+        
+        when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        List<AdminData> admins = mockedDataRepository.getAdmins();
+        
+        assertEquals("admin1", admins.get(0).getLogin());
+    }
+    
+    @Test
+    public void testGetAdminsPassword()
+    {
+        AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
+        AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
+        
+        when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        List<AdminData> admins = mockedDataRepository.getAdmins();
+        
+        assertEquals("pass1", admins.get(0).getPassword());
+    }
+    
+    @Test
+    public void testGetAdminsName()
+    {
+        AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
+        AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
+        
+        when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        List<AdminData> admins = mockedDataRepository.getAdmins();
+        
+        assertEquals("Albert", admins.get(0).getName());
+    }
+    
+    @Test
+    public void testGetAdminsSurname()
+    {
+        AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
+        AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
+        
+        when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        List<AdminData> admins = mockedDataRepository.getAdmins();
+        
+        assertEquals("Almighty", admins.get(0).getSurname());
     }
 }
