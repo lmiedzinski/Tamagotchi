@@ -10,121 +10,115 @@ import javax.swing.JTabbedPane;
 
 import pl.dbjllmjk.Controller.AdminController;
 
-public class AdminView extends JFrame implements WindowListener{
-	private static final long serialVersionUID = 1L;
-	private AdminController adminController;
-	private JTabbedPane tabbedPane;
-	private AccountsTab accountsTab;
-	private PetTypesTab petTypesTab;
-	private FoodTypesTab foodTypesTab;
-	private ActivityTypesTab activityTypesTab;
-	private OperationTypesTab operationTypesTab;
+public class AdminView extends JFrame implements WindowListener {
 
-	public AdminView(AdminController adminController) throws HeadlessException {
-		super("Administrator Panel: " + adminController.getLoggedAdmin().getLogin() + " - Tamagotchi DBJLLMJK");
-		this.adminController = adminController;
-		this.setResizable(false);
-		this.addWindowListener(this);
-		init();
-		this.setLocation(200, 200);
-		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		this.setSize(new Dimension(700, 500));
-		setVisible(true);
-	}
-	
-	private void init(){
-		this.tabbedPane = new JTabbedPane();
-		this.accountsTab = new AccountsTab(this.adminController);
-		this.petTypesTab = new PetTypesTab(this.adminController);
-		this.foodTypesTab = new FoodTypesTab(this.adminController);
-		this.activityTypesTab = new ActivityTypesTab(this.adminController);
-		this.operationTypesTab = new OperationTypesTab(this.adminController);
-		this.tabbedPane.addTab("Accounts", this.accountsTab);
-		this.tabbedPane.addTab("Pet types", this.petTypesTab);
-		this.tabbedPane.addTab("Food types", this.foodTypesTab);
-		this.tabbedPane.addTab("Activity types", this.activityTypesTab);
-		this.tabbedPane.addTab("Operation types", this.operationTypesTab);
-		this.add(this.tabbedPane);
-	}
+    private static final long serialVersionUID = 1L;
+    private AdminController adminController;
+    private JTabbedPane tabbedPane;
+    private AccountsTab accountsTab;
+    private PetTypesTab petTypesTab;
+    private FoodTypesTab foodTypesTab;
+    private ActivityTypesTab activityTypesTab;
+    private OperationTypesTab operationTypesTab;
 
-	@Override
-	public void windowActivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    public AdminView(AdminController adminController) throws HeadlessException {
+        super("Administrator Panel: " + adminController.getLoggedAdmin().getLogin() + " - Tamagotchi DBJLLMJK");
+        this.adminController = adminController;
+        this.setResizable(false);
+        this.addWindowListener(this);
+        init();
+        this.setLocation(200, 200);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setSize(new Dimension(700, 500));
+        setVisible(true);
+    }
 
-	@Override
-	public void windowClosed(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    private void init() {
+        this.tabbedPane = new JTabbedPane();
+        this.accountsTab = new AccountsTab(this.adminController);
+        this.petTypesTab = new PetTypesTab(this.adminController);
+        this.foodTypesTab = new FoodTypesTab(this.adminController);
+        this.activityTypesTab = new ActivityTypesTab(this.adminController);
+        this.operationTypesTab = new OperationTypesTab(this.adminController);
+        this.tabbedPane.addTab("Accounts", this.accountsTab);
+        this.tabbedPane.addTab("Pet types", this.petTypesTab);
+        this.tabbedPane.addTab("Food types", this.foodTypesTab);
+        this.tabbedPane.addTab("Activity types", this.activityTypesTab);
+        this.tabbedPane.addTab("Operation types", this.operationTypesTab);
+        this.add(this.tabbedPane);
+    }
 
-	@Override
-	public void windowClosing(WindowEvent arg0) {
-		this.adminController.logout();
-		
-	}
+    @Override
+    public void windowActivated(WindowEvent arg0) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void windowDeactivated(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void windowDeiconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void windowClosed(WindowEvent arg0) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void windowIconified(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
 
-	@Override
-	public void windowOpened(WindowEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void windowClosing(WindowEvent arg0) {
+        this.adminController.logout();
 
-	public AdminController getAdminController() {
-		return adminController;
-	}
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    @Override
+    public void windowDeactivated(WindowEvent arg0) {
+        // TODO Auto-generated method stub
 
-	public JTabbedPane getTabbedPane() {
-		return tabbedPane;
-	}
+    }
 
-	public AccountsTab getAccountsTab() {
-		return accountsTab;
-	}
+    @Override
+    public void windowDeiconified(WindowEvent arg0) {
+        // TODO Auto-generated method stub
 
-	public PetTypesTab getPetTypesTab() {
-		return petTypesTab;
-	}
+    }
 
-	public FoodTypesTab getFoodTypesTab() {
-		return foodTypesTab;
-	}
+    @Override
+    public void windowIconified(WindowEvent arg0) {
+        // TODO Auto-generated method stub
 
-	public ActivityTypesTab getActivityTypesTab() {
-		return activityTypesTab;
-	}
+    }
 
-	public OperationTypesTab getOperationTypesTab() {
-		return operationTypesTab;
-	}
-	
-	/*
-	 	TODO: Make one window in admin panel using JTabbedPane.
-	 	Pane 1: manage user accounts (add/delete) [using JComboBox/JList]
-	 	Pane 2: manage types of pets (add/delete) [using JComboBox]
-	 	Pane 3: manage types of food/operations/activities (add/delete) [using JComboBox]
-	*/
+    @Override
+    public void windowOpened(WindowEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
+    public AdminController getAdminController() {
+        return adminController;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public JTabbedPane getTabbedPane() {
+        return tabbedPane;
+    }
+
+    public AccountsTab getAccountsTab() {
+        return accountsTab;
+    }
+
+    public PetTypesTab getPetTypesTab() {
+        return petTypesTab;
+    }
+
+    public FoodTypesTab getFoodTypesTab() {
+        return foodTypesTab;
+    }
+
+    public ActivityTypesTab getActivityTypesTab() {
+        return activityTypesTab;
+    }
+
+    public OperationTypesTab getOperationTypesTab() {
+        return operationTypesTab;
+    }
 }
