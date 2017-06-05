@@ -223,9 +223,9 @@ public class UserController {
         petData[1] = p.get().getType();
         petData[2] = Integer.toString(p.get().getAge());
         petData[3] = Double.toString(p.get().getWeight());
-        petData[4] = p.get().getBirthDate().getYear() + "/" 
+        petData[4] = p.get().getBirthDate().getYear() + "/"
                 + p.get().getBirthDate().getMonth() + "/"
-                + p.get().getBirthDate().getDayOfMonth() + " " 
+                + p.get().getBirthDate().getDayOfMonth() + " "
                 + p.get().getBirthDate().getHour() + ":"
                 + p.get().getBirthDate().getMinute();
         petData[5] = Integer.toString(p.get().getHappiness());
@@ -345,9 +345,9 @@ public class UserController {
             if (force) {
                 this.controller.getDataRepository().removePet(pet.get());
             } else {
-                throw new PetTransactionException("You already have pet \'" 
+                throw new PetTransactionException("You already have pet \'"
                         + importedPet.getName() + "\'!\nOld - "
-                        + pet.get().getType() + ", New - " 
+                        + pet.get().getType() + ", New - "
                         + importedPet.getType());
             }
         }

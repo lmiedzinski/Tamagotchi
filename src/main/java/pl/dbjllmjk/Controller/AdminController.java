@@ -8,7 +8,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-
 import pl.dbjllmjk.Model.AccountData;
 import pl.dbjllmjk.Model.Action;
 import pl.dbjllmjk.Model.Activity;
@@ -217,8 +216,8 @@ public class AdminController {
      * @param action
      * @return An array of available checkboxes for {@link Pet}.
      */
-    public Map<String,Boolean> getActionWithTypeConnections(Action action) {
-        Map<String,Boolean> ret = new HashMap<>();
+    public Map<String, Boolean> getActionWithTypeConnections(Action action) {
+        Map<String, Boolean> ret = new HashMap<>();
         Arrays.asList(this.controller.getDataRepository().getAvaliablePetTypes())
                 .stream()
                 .forEach((petType) -> {
@@ -314,9 +313,9 @@ public class AdminController {
      * @param selected {@link Action}
      * @throws PetTransactionException
      */
-    public void updateActionWithTypeConnections(Map<String,Boolean> updated, Action selected) throws PetTransactionException {
+    public void updateActionWithTypeConnections(Map<String, Boolean> updated, Action selected) throws PetTransactionException {
         boolean[] flag = new boolean[]{false};
-        updated.forEach((key,value) -> {
+        updated.forEach((key, value) -> {
             if (value && !this.controller.getDataRepository().getPetTypesForAction(selected).contains(key)) {
                 this.controller.getDataRepository().addActionToPetType(selected, key);
                 flag[0] = true;
