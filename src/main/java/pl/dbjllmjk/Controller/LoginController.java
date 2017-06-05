@@ -4,8 +4,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import pl.dbjllmjk.Model.AccountData;
-import pl.dbjllmjk.Model.BadPasswordException;
-import pl.dbjllmjk.Model.NoSuchUserException;
+import pl.dbjllmjk.Exceptions.BadPasswordException;
+import pl.dbjllmjk.Exceptions.NoSuchUserException;
 import pl.dbjllmjk.Model.UserData;
 import pl.dbjllmjk.View.LoginView;
 

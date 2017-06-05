@@ -14,10 +14,10 @@ import pl.dbjllmjk.Model.Action;
 import pl.dbjllmjk.Model.Activity;
 import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.Food;
-import pl.dbjllmjk.Model.NoSuchUserException;
+import pl.dbjllmjk.Exceptions.NoSuchUserException;
 import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.Pet;
-import pl.dbjllmjk.Model.PetTransactionException;
+import pl.dbjllmjk.Exceptions.PetTransactionException;
 import pl.dbjllmjk.Model.UserData;
 import pl.dbjllmjk.View.AdminView;
 
