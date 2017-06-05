@@ -13,6 +13,8 @@ import pl.dbjllmjk.Controller.Controller;
 import pl.dbjllmjk.Controller.LoginController;
 import pl.dbjllmjk.Exceptions.BadPasswordException;
 import pl.dbjllmjk.Exceptions.NoSuchUserException;
+import pl.dbjllmjk.Model.DataRepository;
+import pl.dbjllmjk.Model.UserData;
 
 /**
  *
@@ -63,5 +65,21 @@ public class LogInTest {
         LoginController ln = new LoginController(new Controller());
         ln.addAccount("aaaa", "aaaaa", "aaaa", "a");
     }
+    
+    @Test(expected = NoSuchUserException.class)
+    public void CreateAccountByUserTest4() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.addAccount("admin", "aaaaa", "aaaa", "a");
+    }
+    
+    @Test
+    public void CreateAccountByUserTest5() throws NoSuchUserException, BadPasswordException {
+        LoginController ln = new LoginController(new Controller());
+        ln.addAccount("aaaa", "aaaa", "aaaa", "aaaa");
+        DataRepository d = new DataRepository();
+        d.removeUser(new UserData("aaaa", "aaaa", "aaaa", "aaaa"));
+    }
+    
+    
 
 }
