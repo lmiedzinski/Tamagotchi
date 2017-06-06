@@ -27,9 +27,9 @@ public class AdminViewTest {
 
     @Test
     public void addAccountByAdminTest0() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("test", "testPassword", "testName", "testSurname", false);
         Boolean result = false;
         for (UserData u : new DataRepository().getUsers()) {
@@ -45,49 +45,49 @@ public class AdminViewTest {
 
     @Test(expected = NoSuchUserException.class)
     public void addAccountByAdminTest1() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("zenek", "testPassword", "testName", "testSurname", false);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAccountByAdminTest2() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("a", "testPassword", "testName", "testSurname", false);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAccountByAdminTest3() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("testLogin", "a", "testName", "testSurname", false);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAccountByAdminTest4() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("testLogin", "aaaaaaaa", "a", "testSurname", false);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAccountByAdminTest5() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("testLogin", "aaaaaaaa", "testName", "a", false);
     }
 
     @Test
     public void addAdminAccountByAdminTest0() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("test", "testPassword", "testName", "testSurname", true);
         Boolean result = false;
         for (AdminData u : new DataRepository().getAdmins()) {
@@ -103,41 +103,41 @@ public class AdminViewTest {
 
     @Test(expected = NoSuchUserException.class)
     public void addAdminAccountByAdminTest1() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("admin", "testPassword", "testName", "testSurname", true);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAdminAccountByAdminTest2() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("a", "testPassword", "testName", "testSurname", true);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAdminAccountByAdminTest3() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("testLogin", "a", "testName", "testSurname", true);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAdminAccountByAdminTest4() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("testLogin", "aaaaaaaa", "a", "testSurname", true);
     }
 
     @Test(expected = NoSuchUserException.class)
     public void addAdminAccountByAdminTest5() throws NoSuchUserException {
-        Controller c = new Controller();
-        c.afterLogin(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
-        AdminController a = new AdminController(c);
+        Controller c = new Controller(1);
+        c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
+        AdminController a = new AdminController(c,null);
         a.addAccount("testLogin", "aaaaaaaa", "testName", "a", true);
     }
 }

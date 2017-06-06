@@ -20,6 +20,10 @@ public class LoginController {
         this.controller = controller;
         new LoginView(this);
     }
+    public LoginController(Controller c,LoginView l){
+        this.controller = c;
+        
+    }
 
     /**
      * Perform logging.

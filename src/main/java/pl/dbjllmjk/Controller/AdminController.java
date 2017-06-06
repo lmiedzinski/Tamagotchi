@@ -50,6 +50,12 @@ public class AdminController {
         this.loggedAdmin = (AdminData) controller.getLoggedAccount();
         this.adminView = new AdminView(this);
     }
+    
+    public AdminController(Controller controller,AdminView adminView) {
+        this.controller = controller;
+        this.loggedAdmin = (AdminData) controller.getLoggedAccount();
+        this.adminView = adminView;
+    }
 
     /**
      * Add new account.

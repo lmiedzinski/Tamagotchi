@@ -32,6 +32,11 @@ public class Controller {
         this.loggedAccount = null;
         new LoginController(this);
     }
+    
+    public Controller(int a){
+        this.dataRepository = new DataRepository();
+        this.loggedAccount = null;
+    }
 
     /**
      * Launch controllers for user/admin after logging in.
@@ -42,6 +47,14 @@ public class Controller {
         this.loggedAccount = loggedAccount;
         if (loggedAccount instanceof AdminData) {
             new AdminController(this);
+        } else if (loggedAccount instanceof UserData) {
+            new UserController(this);
+        }
+    }
+    public void afterLoginT(AccountData loggedAccount) {
+        this.loggedAccount = loggedAccount;
+        if (loggedAccount instanceof AdminData) {
+            new AdminController(this,null);
         } else if (loggedAccount instanceof UserData) {
             new UserController(this);
         }
