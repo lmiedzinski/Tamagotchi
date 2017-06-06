@@ -5,6 +5,8 @@
  */
 package pl.dbjllmjk;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -30,7 +32,7 @@ public class AdminViewTest {
     private Logger logger = LoggerFactory.getLogger(AdminViewTest.class);
 
     @Test
-    public void addAccountByAdminTest0() throws NoSuchUserException {
+    public void addAccountByAdminTest0() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -48,7 +50,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAccountByAdminTest1() throws NoSuchUserException {
+    public void addAccountByAdminTest1() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -56,7 +58,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAccountByAdminTest2() throws NoSuchUserException {
+    public void addAccountByAdminTest2() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -64,7 +66,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAccountByAdminTest3() throws NoSuchUserException {
+    public void addAccountByAdminTest3() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -72,7 +74,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAccountByAdminTest4() throws NoSuchUserException {
+    public void addAccountByAdminTest4() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -80,7 +82,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAccountByAdminTest5() throws NoSuchUserException {
+    public void addAccountByAdminTest5() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -88,7 +90,7 @@ public class AdminViewTest {
     }
 
     @Test
-    public void addAdminAccountByAdminTest0() throws NoSuchUserException {
+    public void addAdminAccountByAdminTest0() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -106,7 +108,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAdminAccountByAdminTest1() throws NoSuchUserException {
+    public void addAdminAccountByAdminTest1() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -114,7 +116,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAdminAccountByAdminTest2() throws NoSuchUserException {
+    public void addAdminAccountByAdminTest2() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -122,7 +124,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAdminAccountByAdminTest3() throws NoSuchUserException {
+    public void addAdminAccountByAdminTest3() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -130,7 +132,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAdminAccountByAdminTest4() throws NoSuchUserException {
+    public void addAdminAccountByAdminTest4() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -138,7 +140,7 @@ public class AdminViewTest {
     }
 
     @Test(expected = NoSuchUserException.class)
-    public void addAdminAccountByAdminTest5() throws NoSuchUserException {
+    public void addAdminAccountByAdminTest5() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -146,7 +148,7 @@ public class AdminViewTest {
     }
 
     @Test
-    public void removeAdminTest0() throws NoSuchUserException {
+    public void removeAdminTest0() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
@@ -172,7 +174,7 @@ public class AdminViewTest {
     }
 
     @Test
-    public void removeAdminTest1() throws NoSuchUserException {
+    public void removeAdminTest1() throws NoSuchUserException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Controller c = new Controller(1);
         c.afterLoginT(new AdminData("admin", "admin", "Administrator", "Adminsurname"));
         AdminController a = new AdminController(c, null);
