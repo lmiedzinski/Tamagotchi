@@ -16,6 +16,7 @@ import pl.dbjllmjk.Exceptions.PetTransactionException;
 import pl.dbjllmjk.Model.AccountData;
 import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.DataRepository;
+import pl.dbjllmjk.Model.Food;
 import pl.dbjllmjk.Model.UserData;
 
 /**
@@ -230,11 +231,51 @@ public class AdminViewTest {
         AdminController a = new AdminController(c, null);
         String[] types = a.getAvaliablePetTypes();
         int k = types.length;
-        a.addPetType("testType");
+        a.addPetType("testType1");
         DataRepository d = new DataRepository();
         types = a.getAvaliablePetTypes();
         Assert.assertTrue(k != types.length);
+        a.removePetType("testType1");
+    }
+    
+     @Test(expected = PetTransactionException.class)
+    public void addPetTypeTest1() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addPetType("testType");
+        a.addPetType("testType");
         a.removePetType("testType");
     }
+    
+    @Test
+    public void addFoodTypeTest0() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addFoodType("testF1", 1);
+        a.removeActionType(new Food("testF1", 1));
+    }
+    
+    @Test(expected = PetTransactionException.class)
+    public void addFoodTypeTest1() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addFoodType("testF", 1);
+        a.addFoodType("testF", 1);
+        a.removeActionType(new Food("testF", 1));
+    }
+    
+    
 
 }
