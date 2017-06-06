@@ -20,9 +20,10 @@ public class LoginController {
         this.controller = controller;
         new LoginView(this);
     }
-    public LoginController(Controller c,LoginView l){
+
+    public LoginController(Controller c, int k) {
         this.controller = c;
-        
+
     }
 
     /**
@@ -47,7 +48,7 @@ public class LoginController {
         if (!selectedAccount.get().getPassword().equals(password)) {
             throw new BadPasswordException();
         }
-        this.controller.afterLogin(selectedAccount.get());
+        this.controller.afterLoginT(selectedAccount.get());
     }
 
     /**

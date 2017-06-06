@@ -56,7 +56,7 @@ public class Controller {
         if (loggedAccount instanceof AdminData) {
             new AdminController(this,null);
         } else if (loggedAccount instanceof UserData) {
-            new UserController(this);
+            new UserController(this,1);
         }
     }
 

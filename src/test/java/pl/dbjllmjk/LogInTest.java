@@ -26,55 +26,55 @@ public class LogInTest {
 
     @Test(expected = NoSuchUserException.class)
     public void LoginWithBadIDTest() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.tryToLog("uwgfyagfuykgayfgkajfgaekfagyfgk", "gneyshgkshukhi");
     }
 
     @Test(expected = BadPasswordException.class)
     public void LoginWithBadPwTest() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.tryToLog("admin", "gneyshgkshukhi");
     }
 
     @Test
     public void CorrectLoginTest() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.tryToLog("admin", "admin");
     }
 
     @Test(expected = NoSuchUserException.class)
     public void CreateAccountByUserTest0() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.addAccount("a", "aaaaa", "aaaa", "aaaa");
     }
 
     @Test(expected = NoSuchUserException.class)
     public void CreateAccountByUserTest1() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.addAccount("aaaa", "a", "aaaa", "aaaa");
     }
 
     @Test(expected = NoSuchUserException.class)
     public void CreateAccountByUserTest2() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.addAccount("aaaa", "aaaaa", "a", "aaaa");
     }
 
     @Test(expected = NoSuchUserException.class)
     public void CreateAccountByUserTest3() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.addAccount("aaaa", "aaaaa", "aaaa", "a");
     }
     
     @Test(expected = NoSuchUserException.class)
     public void CreateAccountByUserTest4() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.addAccount("admin", "aaaaa", "aaaa", "a");
     }
     
     @Test
     public void CreateAccountByUserTest5() throws NoSuchUserException, BadPasswordException {
-        LoginController ln = new LoginController(new Controller());
+        LoginController ln = new LoginController(new Controller(1),1);
         ln.addAccount("aaaa", "aaaa", "aaaa", "aaaa");
         DataRepository d = new DataRepository();
         d.removeUser(new UserData("aaaa", "aaaa", "aaaa", "aaaa"));
