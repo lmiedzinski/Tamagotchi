@@ -318,30 +318,14 @@ public class DataRepositoryTest {
         assertEquals(expectedList, actualList);
     }
     
-    @Test(expected = IOException.class)
-    public void testGetTypesForActionIncrrect(){
-        Activity a = new Activity("testActivity", 5);
-        ArrayList<Action> actions = new ArrayList<Action>();
-        actions.add(a);
-        
-        Activity nullAction = null;
-
-        LocalDateTime daty = LocalDateTime.now();
-        Pet pet1 = new Pet("pet1", "type1", 0, 10, daty, 5, 5, 5,
-                new ArrayList<>(), daty, daty, daty);
-        Pet pet2 = new Pet("pet2", "type2", 0, 12, daty, 4, 5, 5,
-                actions, daty, daty, daty);
-        Pet pet3 = new Pet("pet3", "type2", 0, 9, daty, 6, 5, 5,
-                actions, daty, daty, daty);
-        Pet pet4 = new Pet("pet4", "type3", 0, 20, daty, 4, 6, 5,
-                new ArrayList<>(), daty, daty, daty);
-        
-        when(mockedDataRepository.getPetTypesForAction(nullAction)).thenThrow(new IOException());
-        //doThrow(new IOException()).when(mockedDataRepository).getPetTypesForAction(nullAction);
-        
-        mockedDataRepository.getPetTypesForAction(nullAction);
-        
-        
-        
-    }
+//    @Test(expected = IOException.class)
+//    public void testGetTypesForActionIncrrect(){
+//        Activity nullAction = null;
+//        
+//        when(mockedDataRepository.getPetTypesForAction(nullAction)).thenThrow(new IOException());
+//        //doThrow(new IOException()).when(mockedDataRepository).getPetTypesForAction(nullAction);
+//        
+//        mockedDataRepository.getPetTypesForAction(nullAction);
+//        
+//    }
 }
