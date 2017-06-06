@@ -48,6 +48,12 @@ public class UserController {
         this.loggedUser.updatePets(controller.getDataRepository().getPetsForUser(this.loggedUser));
         this.userView = new UserView(this);
     }
+    public UserController(Controller controller,int k) {
+        this.controller = controller;
+        this.loggedUser = (UserData) controller.getLoggedAccount();
+        this.loggedUser.updatePets(controller.getDataRepository().getPetsForUser(this.loggedUser));
+        
+}
 
     /**
      * @return Currently logged user.
