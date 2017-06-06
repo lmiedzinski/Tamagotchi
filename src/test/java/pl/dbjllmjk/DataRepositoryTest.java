@@ -247,4 +247,67 @@ public class DataRepositoryTest {
         
     }
     
+    @Test
+    public void testGetAllActionsActivities()
+    {
+        Activity a1 = new Activity("aktywnosc1", 1);
+        Activity a2 = new Activity("aktywnosc2", 1);
+        Activity a3 = new Activity("aktywnosc3", 1);
+        
+        Activity testActivity = new Activity();
+        
+        when(mockedDataRepository.getAllActions(testActivity)).thenReturn(Arrays.asList(a1, a2, a3));
+        
+        List<Activity> expectedList = new ArrayList<Activity>();
+        expectedList.add(a1);
+        expectedList.add(a2);
+        expectedList.add(a3);
+        
+        List<Activity> actualList = mockedDataRepository.getAllActions(testActivity);
+        
+        assertEquals(expectedList, actualList);
+    }
+    
+    @Test
+    public void testGetAllActionsFood()
+    {
+        Food a1 = new Food("jedzenie1", 1);
+        Food a2 = new Food("jedzenie2", 1);
+        Food a3 = new Food("jedzenie3", 1);
+        
+        Food testFood = new Food();
+        
+        when(mockedDataRepository.getAllActions(testFood)).thenReturn(Arrays.asList(a1, a2, a3));
+        
+        List<Food> expectedList = new ArrayList<Food>();
+        expectedList.add(a1);
+        expectedList.add(a2);
+        expectedList.add(a3);
+        
+        List<Food> actualList = mockedDataRepository.getAllActions(testFood);
+        
+        assertEquals(expectedList, actualList);
+    }
+    
+    @Test
+    public void testGetAllActionsOperations()
+    {
+        Operation a1 = new Operation("jedzenie1", 1);
+        Operation a2 = new Operation("jedzenie2", 1);
+        Operation a3 = new Operation("jedzenie3", 1);
+        
+        Operation testOp = new Operation();
+        
+        when(mockedDataRepository.getAllActions(testOp)).thenReturn(Arrays.asList(a1, a2, a3));
+        
+        List<Operation> expectedList = new ArrayList<Operation>();
+        expectedList.add(a1);
+        expectedList.add(a2);
+        expectedList.add(a3);
+        
+        List<Operation> actualList = mockedDataRepository.getAllActions(testOp);
+        
+        assertEquals(expectedList, actualList);
+    }
+    
 }
