@@ -61,6 +61,21 @@
                     <mainClass>pl.dbjllmjk.App</mainClass>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <version>1.2.0</version>
+                <configuration>
+                    <targetClasses>
+                        <param>pl.dbjllmjk.Controller*</param>
+                        <param>pl.dbjllmjk.Model*</param>
+                        <param>pl.dbjllmjk.Utils*</param>
+                    </targetClasses>
+                    <targetTests>
+                        <param>pl.dbjllmjk*</param>
+                    </targetTests>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
