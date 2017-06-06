@@ -7,26 +7,26 @@ import pl.dbjllmjk.Model.PetEntry;
 public class PetEntryTest {
 
     @Test
-    public void petEntryTest1(){
+    public void petEntryTest1() {
         PetEntry p = new PetEntry("title", "path");
         Assert.assertEquals("title", p.getTitle());
     }
 
     @Test
-    public void petEntryTest2(){
+    public void petEntryTest2() {
         PetEntry p = new PetEntry("title", "path");
         Assert.assertNotNull(p.getImage());
     }
 
     @Test
-    public void petEntryTest3(){
+    public void petEntryTest3() {
         PetEntry p = new PetEntry("title", "path");
         p.getImage();
         Assert.assertNotNull(p.getImage());
     }
 
     @Test
-    public void petEntryTest4(){
+    public void petEntryTest4() {
         PetEntry p = new PetEntry("title", "path");
         Assert.assertEquals("title", p.toString());
     }

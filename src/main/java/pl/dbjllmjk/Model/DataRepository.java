@@ -21,7 +21,7 @@ import com.healthmarketscience.jackcess.Table;
  * Class which is repsonsible for connection with MS_ACCESS DATABASE. Basic
  * operations: -Read -Write -Modify -Delete
  */
-public class DataRepository {
+public class DataRepository implements DataRepositoryInterface {
 
     /**
      * Property containing database file.
