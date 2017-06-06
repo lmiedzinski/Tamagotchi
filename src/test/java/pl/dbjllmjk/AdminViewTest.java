@@ -14,9 +14,11 @@ import pl.dbjllmjk.Controller.Controller;
 import pl.dbjllmjk.Exceptions.NoSuchUserException;
 import pl.dbjllmjk.Exceptions.PetTransactionException;
 import pl.dbjllmjk.Model.AccountData;
+import pl.dbjllmjk.Model.Activity;
 import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.DataRepository;
 import pl.dbjllmjk.Model.Food;
+import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.UserData;
 
 /**
@@ -237,8 +239,8 @@ public class AdminViewTest {
         Assert.assertTrue(k != types.length);
         a.removePetType("testType1");
     }
-    
-     @Test(expected = PetTransactionException.class)
+
+    @Test(expected = PetTransactionException.class)
     public void addPetTypeTest1() throws PetTransactionException {
         Controller c = new Controller(1);
         AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
@@ -250,7 +252,7 @@ public class AdminViewTest {
         a.addPetType("testType");
         a.removePetType("testType");
     }
-    
+
     @Test
     public void addFoodTypeTest0() throws PetTransactionException {
         Controller c = new Controller(1);
@@ -262,7 +264,7 @@ public class AdminViewTest {
         a.addFoodType("testF1", 1);
         a.removeActionType(new Food("testF1", 1));
     }
-    
+
     @Test(expected = PetTransactionException.class)
     public void addFoodTypeTest1() throws PetTransactionException {
         Controller c = new Controller(1);
@@ -271,11 +273,92 @@ public class AdminViewTest {
         AdminController a = new AdminController(c, null);
         String[] types = a.getAvaliablePetTypes();
         int k = types.length;
-        a.addFoodType("testF", 1);
-        a.addFoodType("testF", 1);
-        a.removeActionType(new Food("testF", 1));
+        a.addFoodType("testF2", 1);
+        a.addFoodType("testF2", 1);
+        a.removeActionType(new Food("testF2", 1));
     }
-    
-    
+
+    @Test(expected = PetTransactionException.class)
+    public void addFoodTypeTest2() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addFoodType("te", 1);
+    }
+
+    @Test
+    public void addActivityTypeTest0() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addActivityType("testF1k", 1);
+        a.removeActionType(new Activity("testF1k", 1));
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void addActivityTypeTest1() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addActivityType("testF1", 1);
+        a.addActivityType("testF1", 1);
+        a.removeActionType(new Activity("testF1", 1));
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void addActivityTypeTest2() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addActivityType("te", 1);
+    }
+
+    @Test
+    public void addOperationTypeTest0() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addOperationType("testFo111", 1);
+        a.removeActionType(new Operation("testFo111", 1));
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void addOperationTypeTest1() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addOperationType("testF1", 1);
+        a.addOperationType("testF1", 1);
+        a.removeActionType(new Operation("testF1", 1));
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void addOperationTypeTest2() throws PetTransactionException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        String[] types = a.getAvaliablePetTypes();
+        int k = types.length;
+        a.addOperationType("te", 1);
+    }
 
 }
