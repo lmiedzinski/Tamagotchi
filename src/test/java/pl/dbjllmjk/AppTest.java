@@ -133,7 +133,7 @@ public class AppTest {
     @Test
     public void makeOperationOnPetTest0() {
         Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
-                5, 10, null, LocalDateTime.now(),
+                5, 5, null, LocalDateTime.now(),
                 LocalDateTime.now(), LocalDateTime.now());
         Operation f = new Operation("test", 5);
         try {
@@ -146,7 +146,7 @@ public class AppTest {
     @Test
     public void makeOperationOnPetTest1() {
         Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
-                5, 10, null, LocalDateTime.now(),
+                5, 0, null, LocalDateTime.now(),
                 LocalDateTime.now(), LocalDateTime.now());
         Operation f = new Operation("test", 5);
         try {
