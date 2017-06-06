@@ -27,19 +27,19 @@ public class LogInTest {
     @Test(expected = NoSuchUserException.class)
     public void LoginWithBadIDTest() throws NoSuchUserException, BadPasswordException {
         LoginController ln = new LoginController(new Controller(1),1);
-        ln.tryToLog("uwgfyagfuykgayfgkajfgaekfagyfgk", "gneyshgkshukhi");
+        ln.tryToLogT("uwgfyagfuykgayfgkajfgaekfagyfgk", "gneyshgkshukhi");
     }
 
     @Test(expected = BadPasswordException.class)
     public void LoginWithBadPwTest() throws NoSuchUserException, BadPasswordException {
         LoginController ln = new LoginController(new Controller(1),1);
-        ln.tryToLog("admin", "gneyshgkshukhi");
+        ln.tryToLogT("admin", "gneyshgkshukhi");
     }
 
     @Test
     public void CorrectLoginTest() throws NoSuchUserException, BadPasswordException {
         LoginController ln = new LoginController(new Controller(1),1);
-        ln.tryToLog("admin", "admin");
+        ln.tryToLogT("admin", "admin");
     }
 
     @Test(expected = NoSuchUserException.class)
