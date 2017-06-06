@@ -11,12 +11,21 @@ import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 import java.time.LocalDateTime;
 
+import pl.dbjllmjk.Controller.AdminController;
+import pl.dbjllmjk.Controller.Controller;
+import pl.dbjllmjk.Exceptions.NoSuchUserException;
+import pl.dbjllmjk.Model.AccountData;
+import pl.dbjllmjk.Model.Activity;
+import pl.dbjllmjk.Model.AdminData;
+import pl.dbjllmjk.Model.Operation;
+import pl.dbjllmjk.Model.UserData;
+import pl.dbjllmjk.Model.Activity;
+import pl.dbjllmjk.Model.Operation;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest {
-
-    private Logger logger = LoggerFactory.getLogger(AppTest.class);
 
     @Test
     public void feedPetTest0() {
@@ -67,5 +76,107 @@ public class AppTest {
                 LocalDateTime.now(), LocalDateTime.now());
         Food f = null;
         ActionLogic.feedPet(p, f);
+    }
+
+    @Test
+    public void playWithPetTest0() {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
+                5, 10, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Activity f = new Activity("test", 5);
+        try {
+            Assert.assertEquals(LocalDateTime.now().getMinute(), ActionLogic.playWithPet(p, f).getLastActivityDate().getMinute());
+        } catch (PetTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void playWithPetTest1() {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
+                5, 10, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Activity f = new Activity("test", 5);
+        try {
+            Assert.assertEquals(5, ActionLogic.playWithPet(p, f).getHappiness());
+        } catch (PetTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void playWithPetTest2() throws PetTransactionException {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+                3, 10, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Activity f = new Activity("test", 5);
+        ActionLogic.playWithPet(p, f);
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void playWithPetTest3() throws PetTransactionException {
+        Pet p = null;
+        Activity f = new Activity("test", 5);
+        ActionLogic.playWithPet(p, f);
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void playWithPetTest4() throws PetTransactionException {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
+                3, 10, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Activity f = null;
+        ActionLogic.playWithPet(p, f);
+    }
+
+    @Test
+    public void makeOperationOnPetTest0() {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
+                5, 5, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Operation f = new Operation("test", 5);
+        try {
+            Assert.assertEquals(LocalDateTime.now().getMinute(), ActionLogic.makeOperationOnPet(p, f).getLastOperationDate().getMinute());
+        } catch (PetTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void makeOperationOnPetTest1() {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+                5, 0, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Operation f = new Operation("test", 5);
+        try {
+            Assert.assertEquals(5, ActionLogic.makeOperationOnPet(p, f).getHealth());
+        } catch (PetTransactionException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void makeOperationOnPetTest2() throws PetTransactionException {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+                3, 10, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Operation f = new Operation("test", 5);
+        ActionLogic.makeOperationOnPet(p, f);
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void makeOperationOnPetTest3() throws PetTransactionException {
+        Pet p = null;
+        Operation f = new Operation("test", 5);
+        ActionLogic.makeOperationOnPet(p, f);
+    }
+
+    @Test(expected = PetTransactionException.class)
+    public void makeOperationOnPetTest4() throws PetTransactionException {
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+                3, 10, null, LocalDateTime.now(),
+                LocalDateTime.now(), LocalDateTime.now());
+        Operation f = new Operation("test", 5);
+        ActionLogic.makeOperationOnPet(p, f);
     }
 }

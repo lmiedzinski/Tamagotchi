@@ -53,21 +53,21 @@ public class AdminController {
         this.loggedAdmin = (AdminData) controller.getLoggedAccount();
         this.adminView = new AdminView(this);
     }
-    
-    public AdminController(Controller controller,AdminView adminView) {
+
+    public AdminController(Controller controller, AdminView adminView) {
         this.controller = controller;
         this.loggedAdmin = (AdminData) controller.getLoggedAccount();
         this.adminView = adminView;
-}
+    }
 
     /**
      * Add new account.
      *
-     * @param login user/admin login.
+     * @param login    user/admin login.
      * @param password user/admin password.
-     * @param name user/admin name.
-     * @param surname user/admin surname.
-     * @param isAdmin if new account should be for admin.
+     * @param name     user/admin name.
+     * @param surname  user/admin surname.
+     * @param isAdmin  if new account should be for admin.
      * @throws NoSuchUserException
      * @throws UnsupportedEncodingException
      * @throws NoSuchAlgorithmException
@@ -143,7 +143,7 @@ public class AdminController {
     public AdminData[] getAdmins() {
         List<AdminData> list = this.controller.getDataRepository().getAdmins();
         return list.toArray(new AdminData[list.size()]);
-}
+    }
 
     /**
      * @return An array of all User accounts ({@link UserData}).
@@ -151,7 +151,7 @@ public class AdminController {
     public UserData[] getUsers() {
         List<UserData> list = this.controller.getDataRepository().getUsers();
         return list.toArray(new UserData[list.size()]);
-}
+    }
 
     /**
      * Remove {@link Pet} type/species.
@@ -318,7 +318,7 @@ public class AdminController {
      * Performs update of connections between {@link Action} and {@link Pet}
      * type.species.
      *
-     * @param updated {@link Pet} types/species.
+     * @param updated  {@link Pet} types/species.
      * @param selected {@link Action}
      * @throws PetTransactionException
      */

@@ -48,12 +48,12 @@ public class UserController {
         this.loggedUser.updatePets(controller.getDataRepository().getPetsForUser(this.loggedUser));
         this.userView = new UserView(this);
     }
-    public UserController(Controller controller,int k) {
+
+    public UserController(Controller controller, int k) {
         this.controller = controller;
         this.loggedUser = (UserData) controller.getLoggedAccount();
         this.loggedUser.updatePets(controller.getDataRepository().getPetsForUser(this.loggedUser));
-        
-}
+    }
 
     /**
      * @return Currently logged user.
@@ -243,7 +243,7 @@ public class UserController {
     /**
      * Performs {@link Food} action on {@link Pet}.
      *
-     * @param name of {@link Pet}.
+     * @param name     of {@link Pet}.
      * @param foodType instance of {@link Food} class.
      * @throws PetTransactionException
      */
@@ -273,7 +273,7 @@ public class UserController {
     /**
      * Performs {@link Activity} on {@link Pet}.
      *
-     * @param name of {@link Pet}.
+     * @param name     of {@link Pet}.
      * @param playType instance of {@link Activity} class.
      * @throws PetTransactionException
      */
@@ -303,7 +303,7 @@ public class UserController {
     /**
      * Performs {@link Operation} on {@link Pet}.
      *
-     * @param name of {@link Pet}.
+     * @param name          of {@link Pet}.
      * @param operationType instance of {@link Operation} class.
      * @throws PetTransactionException
      */
@@ -333,9 +333,9 @@ public class UserController {
     /**
      * Import {@link Pet} form ax XML file.
      *
-     * @param path of the XML file.
+     * @param path  of the XML file.
      * @param force decision if the {@link Pet} should be removed from database
-     * file.
+     *              file.
      * @throws PetTransactionException
      */
     public void importPet(String path, boolean force) throws PetTransactionException {
@@ -363,9 +363,9 @@ public class UserController {
     /**
      * Export currently selected {@link Pet}.
      *
-     * @param path of XML file.
+     * @param path     of XML file.
      * @param fileName of XML file.
-     * @param name of {@link Pet}.
+     * @param name     of {@link Pet}.
      * @throws PetTransactionException
      */
     public void exportPet(String path, String fileName, String name) throws PetTransactionException {
