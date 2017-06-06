@@ -150,7 +150,7 @@ public class AppTest {
                 LocalDateTime.now(), LocalDateTime.now());
         Operation f = new Operation("test", 5);
         try {
-            Assert.assertEquals(0, ActionLogic.makeOperationOnPet(p, f).getHealth());
+            Assert.assertEquals(5, ActionLogic.makeOperationOnPet(p, f).getHealth());
         } catch (PetTransactionException e) {
             e.printStackTrace();
         }
