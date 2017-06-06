@@ -10,6 +10,7 @@ import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Exceptions.PetTransactionException;
 
 import java.time.LocalDateTime;
+
 import pl.dbjllmjk.Controller.AdminController;
 import pl.dbjllmjk.Controller.Controller;
 import pl.dbjllmjk.Exceptions.NoSuchUserException;
@@ -25,8 +26,6 @@ import pl.dbjllmjk.Model.Operation;
  * Unit test for simple App.
  */
 public class AppTest {
-
-    private Logger logger = LoggerFactory.getLogger(AppTest.class);
 
     @Test
     public void feedPetTest0() {
