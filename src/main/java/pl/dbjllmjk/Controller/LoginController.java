@@ -56,18 +56,18 @@ public class LoginController {
         
         this.controller.afterLogin(selectedAccount.get());
     }
-    public void tryToLogT(String login, String password) throws NoSuchUserException, BadPasswordException {
+    public void tryToLogT(String login, String password) throws NoSuchUserException, BadPasswordException, UnsupportedEncodingException, NoSuchAlgorithmException {
         Optional<AccountData> selectedAccount = Stream
                 .concat(this.controller.getDataRepository().getAdmins().stream(),
                         this.controller.getDataRepository().getUsers().stream())
                 .collect(Collectors.toList())
                 .stream().
-                filter(l -> l.getLogin().equals(login))
+                        filter(l -> l.getLogin().equals(login))
                 .findFirst();
         if (!selectedAccount.isPresent()) {
             throw new NoSuchUserException();
         }
-        if (!selectedAccount.get().getPassword().equals(password)) {
+        if (!PasswordHashConverter.checkPassword(selectedAccount.get().getLogin(), password, selectedAccount.get().getPassword())){
             throw new BadPasswordException();
         }
         this.controller.afterLoginT(selectedAccount.get());

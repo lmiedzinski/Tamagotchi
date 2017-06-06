@@ -7,8 +7,10 @@ package pl.dbjllmjk;
 
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Optional;
 import javax.crypto.BadPaddingException;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,19 +27,19 @@ import pl.dbjllmjk.Model.UserData;
 public class LogInTest {
 
     @Test(expected = NoSuchUserException.class)
-    public void LoginWithBadIDTest() throws NoSuchUserException, BadPasswordException {
+    public void LoginWithBadIDTest() throws NoSuchUserException, BadPasswordException, UnsupportedEncodingException, NoSuchAlgorithmException {
         LoginController ln = new LoginController(new Controller(1), 1);
         ln.tryToLogT("uwgfyagfuykgayfgkajfgaekfagyfgk", "gneyshgkshukhi");
     }
 
     @Test(expected = BadPasswordException.class)
-    public void LoginWithBadPwTest() throws NoSuchUserException, BadPasswordException {
+    public void LoginWithBadPwTest() throws NoSuchUserException, BadPasswordException, UnsupportedEncodingException, NoSuchAlgorithmException {
         LoginController ln = new LoginController(new Controller(1), 1);
         ln.tryToLogT("admin", "gneyshgkshukhi");
     }
 
     @Test
-    public void CorrectLoginTest() throws NoSuchUserException, BadPasswordException {
+    public void CorrectLoginTest() throws NoSuchUserException, BadPasswordException, UnsupportedEncodingException, NoSuchAlgorithmException {
         LoginController ln = new LoginController(new Controller(1), 1);
         ln.tryToLogT("admin", "admin");
     }
@@ -76,8 +78,12 @@ public class LogInTest {
     public void CreateAccountByUserTest5() throws NoSuchUserException, BadPasswordException, UnsupportedEncodingException, NoSuchAlgorithmException {
         LoginController ln = new LoginController(new Controller(1), 1);
         ln.addAccount("aaaa", "aaaa", "aaaa", "aaaa");
-        DataRepository d = new DataRepository();
-        d.removeUser(new UserData("aaaa", "aaaa", "aaaa", "aaaa"));
+        Boolean result = false;
+        DataRepository dr = new DataRepository();
+        Optional<UserData> userTest = dr.getUsers().stream().filter(x -> x.getLogin().equals("aaaa")).findFirst();
+        if (userTest.isPresent()) result = true;
+        Assert.assertTrue(result);
+        dr.removeUser(userTest.get());
     }
 
 
