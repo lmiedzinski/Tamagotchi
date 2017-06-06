@@ -81,7 +81,7 @@ public class AppTest {
 
     @Test
     public void playWithPetTest0() {
-        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
                 5, 10, null, LocalDateTime.now(),
                 LocalDateTime.now(), LocalDateTime.now());
         Activity f = new Activity("test", 5);
@@ -94,12 +94,12 @@ public class AppTest {
 
     @Test
     public void playWithPetTest1() {
-        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
                 5, 10, null, LocalDateTime.now(),
                 LocalDateTime.now(), LocalDateTime.now());
         Activity f = new Activity("test", 5);
         try {
-            Assert.assertEquals(0, ActionLogic.playWithPet(p, f).getHappiness());
+            Assert.assertEquals(5, ActionLogic.playWithPet(p, f).getHappiness());
         } catch (PetTransactionException e) {
             e.printStackTrace();
         }
@@ -123,16 +123,16 @@ public class AppTest {
 
     @Test(expected = PetTransactionException.class)
     public void playWithPetTest4() throws PetTransactionException {
-        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
                 3, 10, null, LocalDateTime.now(),
                 LocalDateTime.now(), LocalDateTime.now());
-        Activity f = new Activity("test", 5);
+        Activity f = null;
         ActionLogic.playWithPet(p, f);
     }
 
     @Test
     public void makeOperationOnPetTest0() {
-        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 10,
+        Pet p = new Pet("Tester", "Dog", 10, 11.25, LocalDateTime.now(), 0,
                 5, 10, null, LocalDateTime.now(),
                 LocalDateTime.now(), LocalDateTime.now());
         Operation f = new Operation("test", 5);
