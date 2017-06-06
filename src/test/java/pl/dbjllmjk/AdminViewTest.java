@@ -360,5 +360,17 @@ public class AdminViewTest {
         int k = types.length;
         a.addOperationType("te", 1);
     }
+    
+   
+@Test(expected = NullPointerException.class)
+    public void removeTypeTest0() throws NullPointerException {
+        Controller c = new Controller(1);
+        AdminData admin = new AdminData("admin", "admin", "Administrator", "Adminsurname");
+        c.afterLoginT(admin);
+        AdminController a = new AdminController(c, null);
+        a.removeActionType(new Food("kkkkkk", 0));
+    }
 
+    
+    
 }

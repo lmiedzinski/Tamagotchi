@@ -136,18 +136,16 @@ public class AdminController {
      * @return An array of all Admin accounts ({@link AdminData}).
      */
     public AdminData[] getAdmins() {
-        return (AdminData[]) this.controller.getDataRepository().getAdmins()
-                .stream()
-                .toArray();
+        List<AdminData> list = this.controller.getDataRepository().getAdmins();
+        return list.toArray(new AdminData[list.size()]);
     }
 
     /**
      * @return An array of all User accounts ({@link UserData}).
      */
     public UserData[] getUsers() {
-        return (UserData[]) this.controller.getDataRepository().getUsers()
-                .stream()
-                .toArray();
+        List<UserData> list = this.controller.getDataRepository().getUsers();
+        return list.toArray(new UserData[list.size()]);
     }
 
     /**
