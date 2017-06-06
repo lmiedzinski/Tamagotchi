@@ -5,132 +5,79 @@
  */
 package pl.dbjllmjk;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import pl.dbjllmjk.Controller.AdminController;
 import pl.dbjllmjk.Controller.Controller;
-import pl.dbjllmjk.Controller.UserController;
 import pl.dbjllmjk.Exceptions.PetTransactionException;
 import pl.dbjllmjk.Model.Action;
-import pl.dbjllmjk.Model.Activity;
 import pl.dbjllmjk.Model.DataRepository;
 import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.UserData;
 
-/**
- * @author Damian
- */
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Optional;
+
+
 public class ControllerTest {
 
-    @Test
-    public void makeLogicUpdateTest() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
+    private void addDifferentPets() {
+        Pet pet = new Pet("teest1", "dog", 0, 3, LocalDateTime.now(), 10, 0, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now().minusDays(5));
+        Pet petCopy = new Pet("teest2", "dog", 0, 3, LocalDateTime.now().minusHours(10), 10, 0, 10, new ArrayList<Action>(), LocalDateTime.now().minusHours(10), LocalDateTime.now().minusHours(10), LocalDateTime.now().minusDays(10));
         DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
+        Optional<UserData> userTest = dr.getUsers().stream().filter(x -> x.getLogin().equals("zenek")).findFirst();
+        dr.addPet(pet, userTest.get());
+        dr.addPet(petCopy, userTest.get());
+        Controller c = new Controller(1);
         c.makeLogicUpdate();
-        pet.setLastActivityDate(LocalDateTime.now().plusMinutes(500));
-        c.makeLogicUpdate();
-        Assert.assertEquals(pet.getHappiness(), petCopy.getHappiness());
     }
 
     @Test
     public void makeLogicUpdateTest1() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
+        addDifferentPets();
         DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        c.makeLogicUpdate();
-        pet.setLastFeedingDate(LocalDateTime.now().plusMinutes(500));
-        c.makeLogicUpdate();
-        Assert.assertEquals(pet.getHunger(), petCopy.getHunger());
+        Optional<UserData> userTest = dr.getUsers().stream().filter(x -> x.getLogin().equals("zenek")).findFirst();
+        Optional<Pet> pet1Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest1")).findFirst();
+        Optional<Pet> pet2Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest2")).findFirst();
+        Assert.assertNotEquals(pet1Test.get().getHappiness(), pet2Test.get().getHappiness());
+        dr.removePet(pet1Test.get());
+        dr.removePet(pet2Test.get());
     }
 
     @Test
     public void makeLogicUpdateTest2() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
+        addDifferentPets();
         DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        c.makeLogicUpdate();
-        pet.setLastOperationDate(LocalDateTime.now().plusMinutes(500));
-        c.makeLogicUpdate();
-        Assert.assertEquals(pet.getHealth(), petCopy.getHealth());
+        Optional<UserData> userTest = dr.getUsers().stream().filter(x -> x.getLogin().equals("zenek")).findFirst();
+        Optional<Pet> pet1Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest1")).findFirst();
+        Optional<Pet> pet2Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest2")).findFirst();
+        Assert.assertNotEquals(pet1Test.get().getHunger(), pet2Test.get().getHunger());
+        dr.removePet(pet1Test.get());
+        dr.removePet(pet2Test.get());
     }
 
     @Test
     public void makeLogicUpdateTest3() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
+        addDifferentPets();
         DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        c.makeLogicUpdate();
-        pet.setAge(20);
-        c.makeLogicUpdate();
-        Assert.assertNotSame(pet.getAge(), petCopy.getAge());
+        Optional<UserData> userTest = dr.getUsers().stream().filter(x -> x.getLogin().equals("zenek")).findFirst();
+        Optional<Pet> pet1Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest1")).findFirst();
+        Optional<Pet> pet2Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest2")).findFirst();
+        Assert.assertNotEquals(pet1Test.get().getHealth(), pet2Test.get().getHealth());
+        dr.removePet(pet1Test.get());
+        dr.removePet(pet2Test.get());
     }
 
     @Test
     public void makeLogicUpdateTest4() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
+        addDifferentPets();
         DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        c.makeLogicUpdate();
-        pet.setHunger(2);
-        c.makeLogicUpdate();
-        Assert.assertNotSame(pet.getHunger(), petCopy.getHunger());
+        Optional<UserData> userTest = dr.getUsers().stream().filter(x -> x.getLogin().equals("zenek")).findFirst();
+        Optional<Pet> pet1Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest1")).findFirst();
+        Optional<Pet> pet2Test = dr.getPetsForUser(userTest.get()).stream().filter(x -> x.getName().equals("teest2")).findFirst();
+        Assert.assertNotEquals(pet1Test.get().getAge(), pet2Test.get().getAge());
+        dr.removePet(pet1Test.get());
+        dr.removePet(pet2Test.get());
     }
 
-    @Test
-    public void makeLogicUpdateTest5() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        c.makeLogicUpdate();
-        pet.setHappiness(2);
-        c.makeLogicUpdate();
-        Assert.assertNotSame(pet.getHappiness(), petCopy.getHappiness());
-    }
-
-    @Test
-    public void makeLogicUpdateTest6() throws PetTransactionException {
-        Controller c = new Controller(1);
-
-        Pet pet = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        Pet petCopy = new Pet("teest", "dog", 0, 3, LocalDateTime.now(), 10, 10, 10, new ArrayList<Action>(), LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        DataRepository dr = new DataRepository();
-        dr.addPet(pet, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        dr.addPet(petCopy, new UserData("zenek", "zenek", "zenek", "zenkowski"));
-        c.makeLogicUpdate();
-        pet.setHealth(3);
-        c.makeLogicUpdate();
-        Assert.assertNotSame(pet.getHealth(), petCopy.getHealth());
-    }
 }
