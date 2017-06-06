@@ -11,8 +11,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.AfterClass;
+import org.junit.Assert;
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -26,8 +30,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
+import pl.dbjllmjk.Controller.AdminController;
 import pl.dbjllmjk.Controller.Controller;
 import pl.dbjllmjk.Controller.LoginController;
+import pl.dbjllmjk.Controller.UserController;
 import pl.dbjllmjk.Model.Action;
 import pl.dbjllmjk.Model.Activity;
 import pl.dbjllmjk.Model.AdminData;
@@ -49,6 +55,9 @@ public class DataRepositoryTest {
     @Mock
     private static DataRepositoryInterface mockedDataRepository;
 
+    private Controller c;
+    private AdminController ac;
+    private UserController u;
     
     
     @BeforeClass
@@ -63,66 +72,108 @@ public class DataRepositoryTest {
     
     @Test
     public void testGetUsersSize() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
         UserData user2 = new UserData("user2", "pass2", "Brian", "Benevolent");
 
         when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1, user2));
 
-        List<UserData> users = mockedDataRepository.getUsers();
+        //List<UserData> users = Arrays.asList(ac.getUsers());
 
-        assertEquals(2, users.size());
+        assertEquals(2, ac.getUsers().length);
+    }
+    
+    @Test
+    public void testGetUsersType() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
+        UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
+        UserData user2 = new UserData("user2", "pass2", "Brian", "Benevolent");
+
+        when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1, user2));
+
+        //List<UserData> users = Arrays.asList(ac.getUsers());
+
+        assertEquals(UserData[].class, ac.getUsers().getClass());
+        
+        //assertEquals(UserData, ac.getUsers().length);
     }
     
     @Test
     public void testGetUsersLogin() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
         UserData user2 = new UserData("user2", "pass2", "Brian", "Benevolent");
 
         when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1, user2));
 
-        List<UserData> users = mockedDataRepository.getUsers();
+        UserData[] users = ac.getUsers();
 
-        assertEquals("user1", users.get(0).getLogin());
+        assertEquals("user1", users[0].getLogin());
     }
 
     @Test
     public void testGetUsersPassword() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
         UserData user2 = new UserData("user2", "pass2", "Brian", "Benevolent");
 
         when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1, user2));
 
-        List<UserData> users = mockedDataRepository.getUsers();
+        UserData[] users = ac.getUsers();
 
-        assertEquals("pass1", users.get(0).getPassword());
+        assertEquals("pass1", users[0].getPassword());
     }
 
     @Test
     public void testGetUsersName() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
         UserData user2 = new UserData("user2", "pass2", "Brian", "Benevolent");
 
         when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1, user2));
 
-        List<UserData> users = mockedDataRepository.getUsers();
+        UserData[] users = ac.getUsers();
 
-        assertEquals("Albert", users.get(0).getName());
+        assertEquals("Albert", users[0].getName());
     }
 
     @Test
     public void testGetUsersSurname() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
         UserData user2 = new UserData("user2", "pass2", "Brian", "Benevolent");
 
         when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1, user2));
 
-        List<UserData> users = mockedDataRepository.getUsers();
+        UserData[] users = ac.getUsers();
 
-        assertEquals("Almighty", users.get(0).getSurname());
+        assertEquals("Almighty", users[0].getSurname());
     }
 
     @Test
     public void testGetUsersWithPets() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
 
         LocalDateTime daty = LocalDateTime.now();
@@ -132,73 +183,115 @@ public class DataRepositoryTest {
 
         when(mockedDataRepository.getUsers()).thenReturn(Arrays.asList(user1));
 
-        List<UserData> users = mockedDataRepository.getUsers();
+        UserData[] users = ac.getUsers();
 
-        assertEquals(pet1, users.get(0).getPets().get(0));
+        assertEquals(pet1, users[0].getPets().get(0));
     }
 
     @Test
     public void testGetAdminsSize() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
         AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
 
         when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        AdminData[] admins = ac.getAdmins();
 
-        List<AdminData> admins = mockedDataRepository.getAdmins();
+        assertEquals(2, admins.length);
+    }
+    
+    @Test
+    public void testGetAdminsType() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
+        AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
+        AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
 
-        assertEquals(2, admins.size());
+        when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
+        
+        AdminData[] admins = ac.getAdmins();
+
+        assertEquals(AdminData[].class, admins.getClass());
     }
 
     @Test
     public void testGetAdminsLogin() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
         AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
 
         when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
 
-        List<AdminData> admins = mockedDataRepository.getAdmins();
+        AdminData[] admins = ac.getAdmins();
 
-        assertEquals("admin1", admins.get(0).getLogin());
+        assertEquals("admin1", admins[0].getLogin());
     }
 
     @Test
     public void testGetAdminsPassword() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
         AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
 
         when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
 
-        List<AdminData> admins = mockedDataRepository.getAdmins();
-
-        assertEquals("pass1", admins.get(0).getPassword());
+        AdminData[] admins = ac.getAdmins();
+        
+        assertEquals("pass1", admins[0].getPassword());
     }
 
     @Test
     public void testGetAdminsName() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
         AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
 
         when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
 
-        List<AdminData> admins = mockedDataRepository.getAdmins();
-
-        assertEquals("Albert", admins.get(0).getName());
+        AdminData[] admins = ac.getAdmins();
+        
+        assertEquals("Albert", admins[0].getName());
     }
 
     @Test
     public void testGetAdminsSurname() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         AdminData admin1 = new AdminData("admin1", "pass1", "Albert", "Almighty");
         AdminData admin2 = new AdminData("admin2", "pass2", "Ben", "Bashful");
 
         when(mockedDataRepository.getAdmins()).thenReturn(Arrays.asList(admin1, admin2));
 
-        List<AdminData> admins = mockedDataRepository.getAdmins();
-
-        assertEquals("Almighty", admins.get(0).getSurname());
+        AdminData[] admins = ac.getAdmins();
+        
+        assertEquals("Almighty", admins[0].getSurname());
     }
 
     @Test
     public void testGetAvaliablePetTypesSize() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
+        c.setLoggedAccount(user1);
+        u = new UserController(c, 0);
+        
         String type1 = "Snake";
         String type2 = "Dog";
         String type3 = "Cat";
@@ -207,14 +300,39 @@ public class DataRepositoryTest {
         
         when(mockedDataRepository.getAvaliablePetTypes()).thenReturn(types);
         
-        String[] avaliableTypes = mockedDataRepository.getAvaliablePetTypes();
+        String[] avaliableTypes = u.getAvaliablePetTypes();
         
         assertEquals(4, avaliableTypes.length);
     }
     
     @Test
-    public void testGetPetsForUserSize(){
+    public void testGetAvaliablePetTypesArrays() {
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
         UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
+        c.setLoggedAccount(user1);
+        u = new UserController(c, 0);
+        
+        String type1 = "Snake";
+        String type2 = "Dog";
+        String type3 = "Cat";
+        String type4 = "Bunny";
+        String[] types = {type1, type2, type3, type4};
+        
+        when(mockedDataRepository.getAvaliablePetTypes()).thenReturn(types);
+        
+        String[] avaliableTypes = u.getAvaliablePetTypes();
+        
+        assertArrayEquals(types, avaliableTypes);
+    }
+    
+    @Test
+    public void testGetPetsForUserSize(){
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        UserData user1 = new UserData("user1", "pass1", "Albert", "Almighty");
+        c.setLoggedAccount(user1);
+        u = new UserController(c, 0);
         
         LocalDateTime daty = LocalDateTime.now();
         Pet pet1 = new Pet("pet1", "type1", 0, 10, daty, 5, 5, 5,
@@ -232,11 +350,20 @@ public class DataRepositoryTest {
     }
     
     @Test
-    public void testGetPetTypesForActionCorrect(){
+    public void testGetPetTypesForAction(){
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
+        
         Activity a = new Activity("testActivity", 5);
         ArrayList<Action> actions = new ArrayList<Action>();
         actions.add(a);
-
+        
+        Map<String,Boolean> expectedMap = new HashMap<>();
+        expectedMap.put("type1", Boolean.FALSE);
+        expectedMap.put("type2", Boolean.TRUE);
+        expectedMap.put("type3", Boolean.FALSE);
+        
         LocalDateTime daty = LocalDateTime.now();
         Pet pet1 = new Pet("pet1", "type1", 0, 10, daty, 5, 5, 5,
                 new ArrayList<>(), daty, daty, daty);
@@ -246,86 +373,26 @@ public class DataRepositoryTest {
                 actions, daty, daty, daty);
         Pet pet4 = new Pet("pet4", "type3", 0, 20, daty, 4, 6, 5,
                 new ArrayList<>(), daty, daty, daty);
+        String[] s = {"type1", "type2", "type3"};
+        when(mockedDataRepository.getAvaliablePetTypes()).thenReturn(s);
+        when(mockedDataRepository.getPetTypesForAction(actions.get(0))).thenReturn(Arrays.asList(pet2.getType(), pet3.getType()));
+        Map<String, Boolean> resultMap = ac.getActionWithTypeConnections(a);
         
-        when(mockedDataRepository.getPetTypesForAction(actions.get(0))).thenReturn(Arrays.asList(pet2.getType()));
-        
-        ArrayList<String> resultType = new ArrayList<>();
-        resultType.add("type2");
-        assertEquals(resultType, mockedDataRepository.getPetTypesForAction(a));
+        assertEquals(expectedMap, resultMap);
         
     }
     
     @Test
-    public void testGetAllActionsActivities()
-    {
-        Activity a1 = new Activity("aktywnosc1", 1);
-        Activity a2 = new Activity("aktywnosc2", 1);
-        Activity a3 = new Activity("aktywnosc3", 1);
+    public void testGetAvaliablePetTypes(){
+        c = new Controller(0);
+        c.setDataRepository(mockedDataRepository);
+        ac = new AdminController(c, null);
         
-        Activity testActivity = new Activity();
+        String[] s = {"type1", "type2", "type3"};
         
-        when(mockedDataRepository.getAllActions(testActivity)).thenReturn(Arrays.asList(a1, a2, a3));
+        when(mockedDataRepository.getAvaliablePetTypes()).thenReturn(s);
         
-        List<Activity> expectedList = new ArrayList<Activity>();
-        expectedList.add(a1);
-        expectedList.add(a2);
-        expectedList.add(a3);
-        
-        List<Activity> actualList = mockedDataRepository.getAllActions(testActivity);
-        
-        assertEquals(expectedList, actualList);
+        Assert.assertArrayEquals(s, ac.getAvaliablePetTypes());
     }
-    
-    @Test
-    public void testGetAllActionsFood()
-    {
-        Food a1 = new Food("jedzenie1", 1);
-        Food a2 = new Food("jedzenie2", 1);
-        Food a3 = new Food("jedzenie3", 1);
         
-        Food testFood = new Food();
-        
-        when(mockedDataRepository.getAllActions(testFood)).thenReturn(Arrays.asList(a1, a2, a3));
-        
-        List<Food> expectedList = new ArrayList<Food>();
-        expectedList.add(a1);
-        expectedList.add(a2);
-        expectedList.add(a3);
-        
-        List<Food> actualList = mockedDataRepository.getAllActions(testFood);
-        
-        assertEquals(expectedList, actualList);
-    }
-    
-    @Test
-    public void testGetAllActionsOperations()
-    {
-        Operation a1 = new Operation("jedzenie1", 1);
-        Operation a2 = new Operation("jedzenie2", 1);
-        Operation a3 = new Operation("jedzenie3", 1);
-        
-        Operation testOp = new Operation();
-        
-        when(mockedDataRepository.getAllActions(testOp)).thenReturn(Arrays.asList(a1, a2, a3));
-        
-        List<Operation> expectedList = new ArrayList<Operation>();
-        expectedList.add(a1);
-        expectedList.add(a2);
-        expectedList.add(a3);
-        
-        List<Operation> actualList = mockedDataRepository.getAllActions(testOp);
-        
-        assertEquals(expectedList, actualList);
-    }
-    
-//    @Test(expected = IOException.class)
-//    public void testGetTypesForActionIncrrect(){
-//        Activity nullAction = null;
-//        
-//        when(mockedDataRepository.getPetTypesForAction(nullAction)).thenThrow(new IOException());
-//        //doThrow(new IOException()).when(mockedDataRepository).getPetTypesForAction(nullAction);
-//        
-//        mockedDataRepository.getPetTypesForAction(nullAction);
-//        
-//    }
 }

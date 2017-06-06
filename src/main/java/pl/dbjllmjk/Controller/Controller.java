@@ -8,6 +8,7 @@ import java.util.List;
 import pl.dbjllmjk.Model.AccountData;
 import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.DataRepository;
+import pl.dbjllmjk.Model.DataRepositoryInterface;
 import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.UserData;
 
@@ -20,7 +21,7 @@ public class Controller {
     /**
      * Data repository field.
      */
-    private DataRepository dataRepository;
+    private DataRepositoryInterface dataRepository;
 
     /**
      * Stores current logged user/admin data ({@link AccountData}).
@@ -32,6 +33,11 @@ public class Controller {
         this.loggedAccount = null;
         new LoginController(this);
     }
+    
+    public Controller(int a){
+        this.dataRepository = new DataRepository();
+        this.loggedAccount = null;
+}
 
     /**
      * Launch controllers for user/admin after logging in.
@@ -133,7 +139,7 @@ public class Controller {
     /**
      * @return Data Repository from Model Layer
      */
-    public DataRepository getDataRepository() {
+    public DataRepositoryInterface getDataRepository() {
         return dataRepository;
     }
 
@@ -142,5 +148,13 @@ public class Controller {
      */
     public AccountData getLoggedAccount() {
         return loggedAccount;
+    }
+    
+    public void setLoggedAccount(AccountData ad){
+        this.loggedAccount = ad;
+    }
+    
+    public void setDataRepository(DataRepositoryInterface d){
+        this.dataRepository = d;
     }
 }
