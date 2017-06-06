@@ -5,9 +5,6 @@
  */
 package pl.dbjllmjk;
 
-import com.healthmarketscience.jackcess.Database;
-import com.healthmarketscience.jackcess.Table;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,32 +15,22 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.doThrow;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import org.mockito.runners.MockitoJUnitRunner;
 import pl.dbjllmjk.Controller.AdminController;
 import pl.dbjllmjk.Controller.Controller;
-import pl.dbjllmjk.Controller.LoginController;
 import pl.dbjllmjk.Controller.UserController;
 import pl.dbjllmjk.Model.Action;
 import pl.dbjllmjk.Model.Activity;
 import pl.dbjllmjk.Model.AdminData;
 import pl.dbjllmjk.Model.DataRepository;
 import pl.dbjllmjk.Model.DataRepositoryInterface;
-import pl.dbjllmjk.Model.Food;
-import pl.dbjllmjk.Model.Operation;
 import pl.dbjllmjk.Model.Pet;
 import pl.dbjllmjk.Model.UserData;
-import sun.reflect.annotation.AnnotationParser;
 
 /**
  *
